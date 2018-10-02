@@ -26,12 +26,12 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css('base.css') ?>
-    <?= $this->Html->css('style.css') ?>
+    <?= $this->Html->css('base') ?>
+    <?= $this->Html->css('style') ?>
+    <?= $this->Html->css('materialize.min') ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
-    <?= $this->fetch('script') ?>
 </head>
 <body>
     <nav class="top-bar expanded" data-topbar role="navigation">
@@ -53,5 +53,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     </div>
     <footer>
     </footer>
+    <?= $this->Html->script('materialize') ?>
+    <?= $this->fetch('script') ?>
 </body>
 </html>
