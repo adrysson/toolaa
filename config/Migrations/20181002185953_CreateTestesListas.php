@@ -1,7 +1,7 @@
 <?php
 use Migrations\AbstractMigration;
 
-class CreateTestes extends AbstractMigration
+class CreateTestesListas extends AbstractMigration
 {
     /**
      * Change Method.
@@ -12,22 +12,13 @@ class CreateTestes extends AbstractMigration
      */
     public function change()
     {
-        $this->table('testes')
-        ->addColumn('lista_id', 'integer', [
+        $this->table('testes_listas')
+        ->addColumn('artigo_id', 'integer', [
             'default' => null,
             'limit' => 11,
             'null' => false,
         ])
-        ->addColumn('conteudo', 'text', [
-            'default' => null,
-            'null' => false,
-        ])
-        ->addColumn('tipo_id', 'integer', [
-            'default' => null,
-            'limit' => 11,
-            'null' => false,
-        ])
-        ->addColumn('resultado_id', 'integer', [
+        ->addColumn('ferramenta_id', 'integer', [
             'default' => null,
             'limit' => 11,
             'null' => false,
@@ -45,21 +36,17 @@ class CreateTestes extends AbstractMigration
             'default' => 'CURRENT_TIMESTAMP',
             'null' => false,
         ])
-        ->addForeignKey('lista_id', 'testes_listas', 'id', [
+        ->addForeignKey('artigo_id', 'artigos', 'id', [
             'delete'=> 'CASCADE',
-            'constraint' => 'fk_testes_listas'
+            'constraint' => 'fk_testes_listas_artigos'
         ])
-        ->addForeignKey('tipo_id', 'testes_tipos', 'id', [
+        ->addForeignKey('ferramenta_id', 'ferramentas', 'id', [
             'delete'=> 'CASCADE',
-            'constraint' => 'fk_testes_tipos'
-        ])
-        ->addForeignKey('resultado_id', 'testes_resultados', 'id', [
-            'delete'=> 'CASCADE',
-            'constraint' => 'fk_testes_resultados'
+            'constraint' => 'fk_testes_listas_ferramentas'
         ])
         ->addForeignKey('user_id', 'users', 'id', [
             'delete'=> 'CASCADE',
-            'constraint' => 'fk_testes_users'
+            'constraint' => 'fk_testes_listas_users'
         ])
         ->create();
     }

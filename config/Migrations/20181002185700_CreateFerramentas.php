@@ -12,12 +12,12 @@ class CreateFerramentas extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('ferramentas');
-        $table->addColumn('nome', 'string', [
+        $this->table('ferramentas')
+        ->addColumn('nome', 'string', [
             'default' => null,
             'limit' => 255,
             'null' => false,
-        ]);
-        $table->create();
+        ])
+        ->create();
     }
 }

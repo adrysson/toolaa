@@ -12,12 +12,12 @@ class CreateTestesTipos extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('testes_tipos');
-        $table->addColumn('nome', 'string', [
+        $this->table('testes_tipos')
+        ->addColumn('nome', 'string', [
             'default' => null,
             'limit' => 255,
             'null' => false,
-        ]);
-        $table->create();
+        ])
+        ->create();
     }
 }
