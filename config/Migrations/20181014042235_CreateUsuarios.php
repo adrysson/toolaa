@@ -25,7 +25,7 @@ class CreateUsuarios extends AbstractMigration
         ]);
         $table->addColumn('senha', 'string', [
             'default' => null,
-            'limit' => 50,
+            'limit' => 100,
             'null' => false,
         ]);
         $table->addColumn('grupo_id', 'integer', [

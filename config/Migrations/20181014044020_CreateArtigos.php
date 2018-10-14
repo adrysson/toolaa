@@ -13,7 +13,7 @@ class CreateArtigos extends AbstractMigration
     public function change()
     {
         $table = $this->table('artigos');
-        $table->addColumn('nome', 'string', [
+        $table->addColumn('titulo', 'string', [
             'default' => null,
             'limit' => 255,
             'null' => false,
