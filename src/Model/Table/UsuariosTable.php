@@ -48,7 +48,7 @@ class UsuariosTable extends Table
             'joinType' => 'INNER'
         ]);
         $this->belongsTo('Perfis', [
-            'propertyName' => 'Perfil',
+            'propertyName' => 'perfil',
             'className' => 'UsuariosPerfis',
             'foreignKey' => 'perfil_id',
             'joinType' => 'INNER'
@@ -102,7 +102,7 @@ class UsuariosTable extends Table
     {
         $rules->add($rules->isUnique(['email']));
         $rules->add($rules->existsIn(['grupo_id'], 'Grupos'));
-        $rules->add($rules->existsIn(['perfil_id'], 'UsuariosPerfis'));
+        $rules->add($rules->existsIn(['perfil_id'], 'Perfis'));
 
         return $rules;
     }

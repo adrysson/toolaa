@@ -77,3 +77,9 @@ Router::scope('/', function (RouteBuilder $routes) {
      */
     $routes->fallbacks(DashedRoute::class);
 });
+
+Router::scope('/api/v1', ['prefix'=>'api/v1'], function(RouteBuilder $routes) {
+    $routes->setExtensions(['json']);
+    $routes->resources('Usuarios');
+    $routes->fallbacks('InflectedRoute');
+});

@@ -40,7 +40,7 @@ class Usuario extends Entity
         'senha',
         'grupo_id',
         'perfil_id',
-    ]
+    ];
 
     protected function _setSenha($senha)
     {
