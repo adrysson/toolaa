@@ -82,5 +82,6 @@ Router::scope('/api/v1', ['prefix'=>'api/v1'], function(RouteBuilder $routes) {
     $routes->setExtensions(['json']);
     $routes->resources('Usuarios');
     $routes->resources('Artigos');
+    $routes->resources('Ferramentas');
     $routes->fallbacks('InflectedRoute');
 });
