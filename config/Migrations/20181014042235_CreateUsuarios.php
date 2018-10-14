@@ -46,6 +46,14 @@ class CreateUsuarios extends AbstractMigration
             'default' => 'CURRENT_TIMESTAMP',
             'null' => false,
         ]);
+        $table->addForeignKey('grupo_id', 'grupos', 'id', [
+            'delete'=> 'CASCADE',
+            'constraint' => 'fk_usuarios_grupos'
+        ]);
+        $table->addForeignKey('perfil_id', 'usuarios_perfis', 'id', [
+            'delete'=> 'CASCADE',
+            'constraint' => 'fk_usuarios_perfis'
+        ]);
         $table->create();
     }
 }
