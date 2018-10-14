@@ -54,7 +54,6 @@ class UsuariosTable extends Table
             'joinType' => 'INNER'
         ]);
         $this->hasMany('Testes', [
-            'className' => 'TestesBlocos',
             'foreignKey' => 'usuario_id'
         ]);
     }
