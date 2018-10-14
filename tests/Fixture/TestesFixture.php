@@ -54,8 +54,8 @@ class TestesFixture extends TestFixture
                 'artigo_id' => 1,
                 'ferramenta_id' => 1,
                 'usuario_id' => 1,
-                'created' => '2018-10-14 04:32:08',
-                'modified' => '2018-10-14 04:32:08'
+                'created' => '2018-10-14 04:38:52',
+                'modified' => '2018-10-14 04:38:52'
             ],
         ];
         parent::init();

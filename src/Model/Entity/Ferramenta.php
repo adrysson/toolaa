@@ -4,20 +4,14 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Testis Entity
+ * Ferramenta Entity
  *
  * @property int $id
- * @property int $artigo_id
- * @property int $ferramenta_id
- * @property int $usuario_id
- * @property \Cake\I18n\FrozenTime $created
- * @property \Cake\I18n\FrozenTime $modified
+ * @property string $nome
  *
- * @property \App\Model\Entity\Artigo $artigo
- * @property \App\Model\Entity\Ferramenta $ferramenta
- * @property \App\Model\Entity\Usuario $usuario
+ * @property \App\Model\Entity\Teste[] $testes
  */
-class Teste extends Entity
+class Ferramenta extends Entity
 {
 
     /**
@@ -31,11 +25,5 @@ class Teste extends Entity
      */
     protected $_accessible = [
         '*' => true
-    ];
-
-    protected $_hidden = [
-        'artigo_id',
-        'ferramenta_id',
-        'usuario_id',
     ];
 }
