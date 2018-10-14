@@ -2,6 +2,8 @@
 namespace App\Controller\Api\V1;
 
 use App\Controller\Api\V1\AppController;
+use Firebase\JWT\JWT;
+use Cake\Utility\Security;
 
 /**
  * Usuarios Controller
@@ -13,6 +15,11 @@ use App\Controller\Api\V1\AppController;
 class UsuariosController extends AppController
 {
 
+    public function initialize()
+    {
+        parent::initialize();
+        $this->Auth->allow(['login']);
+    }
     /**
      * Index method
      *
@@ -119,5 +126,27 @@ class UsuariosController extends AppController
             'apagado' => $apagado,
             '_serialize' => ['usuario', 'apagado']
         ]);
+    }
+
+    public function login()
+    {
+        if ($this->request->is('post')) {
+            if ($usuario = $this->Auth->identify()) {
+                $this->Auth->setUser($usuario);
+                $data = [
+                    'token' => JWT::encode([
+                        'sub' => $usuario['id'],
+                        'exp' => time() + 3600 * 24
+                    ], Security::salt())
+                ];
+                $this->set([
+                    'token' => $data['token'],
+                    'usuario' => $usuario,
+                    '_serialize' => ['token', 'usuario']
+                ]);
+            } else{
+                return $this->response->withStatus(422)->withStringBody('E-mail ou senha incorreto, tente novamente.');
+            }
+        }
     }
 }

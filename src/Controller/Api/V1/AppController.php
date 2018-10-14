@@ -45,6 +45,27 @@ class AppController extends Controller
             'enableBeforeRedirect' => false,
         ]);
 
+        $this->loadComponent('Auth', [
+            'storage' => 'Memory',
+            'authenticate' => [
+                'Form' => [
+                    'userModel' => 'Usuarios',
+                    'fields' => [
+                        'username' => 'email',
+                        'password' => 'senha'
+                    ]
+                ],
+                'ADmad/JwtAuth.Jwt' => [
+                    'userModel' => 'Usuarios',
+                    'fields' => [
+                        'id' => 'id'
+                    ],
+                    'parameter' => '_token',
+                ]
+            ],
+            'checkAuthIn' => 'Controller.initialize',
+        ]);
+
         /*
          * Enable the following component for recommended CakePHP security settings.
          * see https://book.cakephp.org/3.0/en/controllers/components/security.html

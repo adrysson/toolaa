@@ -1,7 +1,7 @@
 <?php
 namespace App\Controller\Api\V1;
 
-use App\Controller\AppController;
+use App\Controller\Api\V1\AppController;
 
 /**
  * Artigos Controller
