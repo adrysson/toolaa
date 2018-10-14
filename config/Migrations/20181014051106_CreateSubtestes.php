@@ -1,7 +1,7 @@
 <?php
 use Migrations\AbstractMigration;
 
-class CreateTestes extends AbstractMigration
+class CreateSubtestes extends AbstractMigration
 {
     /**
      * Change Method.
@@ -12,13 +12,13 @@ class CreateTestes extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('testes');
+        $table = $this->table('subtestes');
         $table->addColumn('tipo_id', 'integer', [
             'default' => null,
             'limit' => 11,
             'null' => false,
         ]);
-        $table->addColumn('bloco_id', 'integer', [
+        $table->addColumn('teste_id', 'integer', [
             'default' => null,
             'limit' => 11,
             'null' => false,
@@ -32,17 +32,17 @@ class CreateTestes extends AbstractMigration
             'default' => null,
             'null' => false,
         ]);
-        $table->addForeignKey('tipo_id', 'testes_tipos', 'id', [
+        $table->addForeignKey('tipo_id', 'subtestes_tipos', 'id', [
             'delete'=> 'CASCADE',
-            'constraint' => 'fk_testes_tipos'
+            'constraint' => 'fk_subtestes_tipos'
         ]);
-        $table->addForeignKey('bloco_id', 'testes_blocos', 'id', [
+        $table->addForeignKey('teste_id', 'testes', 'id', [
             'delete'=> 'CASCADE',
-            'constraint' => 'fk_testes_blocos'
+            'constraint' => 'fk_subtestes_testes'
         ]);
-        $table->addForeignKey('resultado_id', 'testes_resultados', 'id', [
+        $table->addForeignKey('resultado_id', 'subtestes_resultados', 'id', [
             'delete'=> 'CASCADE',
-            'constraint' => 'fk_testes_resultados'
+            'constraint' => 'fk_subtestes_resultados'
         ]);
         $table->create();
     }

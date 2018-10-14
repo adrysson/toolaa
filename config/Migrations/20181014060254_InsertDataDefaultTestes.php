@@ -54,13 +54,13 @@ class InsertDataDefaultTestes extends AbstractMigration
              ],
          ];
 
-         $this->table('testes_tipos')->insert($tipos)->save();
-         $this->table('testes_resultados')->insert($resultados)->save();
+         $this->table('subtestes_tipos')->insert($tipos)->save();
+         $this->table('subtestes_resultados')->insert($resultados)->save();
      }
 
      public function down()
      {
-         $this->execute('DELETE FROM testes_tipos');
-         $this->execute('DELETE FROM testes_resultados');
+         $this->execute('DELETE FROM subtestes_tipos');
+         $this->execute('DELETE FROM subtestes_resultados');
      }
 }

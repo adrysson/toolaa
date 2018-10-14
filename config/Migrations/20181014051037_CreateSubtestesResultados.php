@@ -1,7 +1,7 @@
 <?php
 use Migrations\AbstractMigration;
 
-class CreateTestesTipos extends AbstractMigration
+class CreateSubtestesResultados extends AbstractMigration
 {
     /**
      * Change Method.
@@ -12,10 +12,10 @@ class CreateTestesTipos extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('testes_tipos');
+        $table = $this->table('subtestes_resultados');
         $table->addColumn('nome', 'string', [
             'default' => null,
-            'limit' => 50,
+            'limit' => 100,
             'null' => false,
         ]);
         $table->create();

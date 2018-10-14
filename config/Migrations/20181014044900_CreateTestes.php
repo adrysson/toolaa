@@ -1,7 +1,7 @@
 <?php
 use Migrations\AbstractMigration;
 
-class CreateTestesBlocos extends AbstractMigration
+class CreateTestes extends AbstractMigration
 {
     /**
      * Change Method.
@@ -12,7 +12,7 @@ class CreateTestesBlocos extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('testes_blocos');
+        $table = $this->table('testes');
         $table->addColumn('artigo_id', 'integer', [
             'default' => null,
             'limit' => 11,
