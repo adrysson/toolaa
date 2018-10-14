@@ -35,6 +35,8 @@ class Application extends BaseApplication
      */
     public function bootstrap()
     {
+        $this->addPlugin('Materialize');
+
         $this->addPlugin('ADmad/JwtAuth');
 
         // Call parent to load bootstrap from files.

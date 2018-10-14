@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f19201678037dbd22abeaf29927a3f31",
+    "content-hash": "a8755adacddced534ff949ed81e4fe5a",
     "packages": [
         {
             "name": "admad/cakephp-jwt-auth",
@@ -383,6 +383,46 @@
             "description": "A simple library to encode and decode JSON Web Tokens (JWT) in PHP. Should conform to the current spec.",
             "homepage": "https://github.com/firebase/php-jwt",
             "time": "2017-06-27T22:17:23+00:00"
+        },
+        {
+            "name": "jeffersonbehling/materialize-theme-cakephp",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jeffersonbehling/materialize-theme-cakephp.git",
+                "reference": "fcbe7fb20dca07d0ed4478737c524a54e5179ac4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jeffersonbehling/materialize-theme-cakephp/zipball/fcbe7fb20dca07d0ed4478737c524a54e5179ac4",
+                "reference": "fcbe7fb20dca07d0ed4478737c524a54e5179ac4",
+                "shasum": ""
+            },
+            "require": {
+                "cakephp/cakephp": "^3.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.7|^6.0"
+            },
+            "type": "cakephp-plugin",
+            "autoload": {
+                "psr-4": {
+                    "Materialize\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jefferson Vantuir",
+                    "homepage": "https://jeffersonbehling.github.io",
+                    "role": "Author"
+                }
+            ],
+            "description": "Materialize plugin for CakePHP",
+            "time": "2018-05-21T11:01:45+00:00"
         },
         {
             "name": "josegonzalez/dotenv",
@@ -2731,6 +2771,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "jeffersonbehling/materialize-theme-cakephp": 20,
         "psy/psysh": 0
     },
     "prefer-stable": true,
