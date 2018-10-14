@@ -111,7 +111,7 @@ class ArtigosController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        $this->request->allowMethod(['delete']);
         $artigo = $this->Artigos->get($id);
         $apagado = $this->Artigos->delete($artigo);
         $this->set([

@@ -4,13 +4,13 @@ namespace App\Controller\Api\V1;
 use App\Controller\AppController;
 
 /**
- * Ferramentas Controller
+ * Testes Controller
  *
- * @property \App\Model\Table\FerramentasTable $Ferramentas
+ * @property \App\Model\Table\TestesTable $Testes
  *
- * @method \App\Model\Entity\Ferramenta[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ * @method \App\Model\Entity\Testis[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class FerramentasController extends AppController
+class TestesController extends AppController
 {
 
     /**
@@ -20,30 +20,33 @@ class FerramentasController extends AppController
      */
     public function index()
     {
-        $ferramentas = $this->paginate($this->Ferramentas);
+        $this->paginate = [
+            'contain' => ['Artigos', 'Ferramentas', 'Usuarios']
+        ];
+        $testes = $this->paginate($this->Testes);
 
         $this->set([
-            'ferramentas'  => $ferramentas,
-            '_serialize' => 'ferramentas',
+            'testes'  => $testes,
+            '_serialize' => 'testes',
         ]);
     }
 
     /**
      * View method
      *
-     * @param string|null $id Ferramenta id.
+     * @param string|null $id Testis id.
      * @return \Cake\Http\Response|void
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null)
     {
-        $ferramenta = $this->Ferramentas->get($id, [
-            'contain' => ['Testes']
+        $teste = $this->Testes->get($id, [
+            'contain' => ['Artigos', 'Ferramentas', 'Usuarios', 'Subtestes']
         ]);
 
         $this->set([
-            'ferramenta'  => $ferramenta,
-            '_serialize' => 'ferramenta',
+            'teste'  => $teste,
+            '_serialize' => 'teste',
         ]);
     }
 
@@ -54,18 +57,18 @@ class FerramentasController extends AppController
      */
     public function add()
     {
-        $ferramenta = $this->Ferramentas->newEntity();
+        $teste = $this->Testes->newEntity();
         if ($this->request->is('post')) {
-            $ferramenta = $this->Ferramentas->patchEntity($ferramenta, $this->request->getData());
-            if ($ferramenta_salvo = $this->Ferramentas->save($ferramenta)) {
+            $teste = $this->Testes->patchEntity($teste, $this->request->getData(), ['associated' => 'Subtestes']);
+            if ($teste_salvo = $this->Testes->save($teste)) {
                 $this->set([
-                    'ferramenta' => $ferramenta_salvo,
-                    '_serialize' => 'ferramenta'
+                    'teste' => $teste_salvo,
+                    '_serialize' => 'teste'
                 ]);
             }else{
                 $this->response = $this->response->withStatus(422);
                 $this->set([
-                    'errors' => $ferramenta->errors(),
+                    'errors' => $teste->errors(),
                     '_serialize' => 'errors'
                 ]);
             }
@@ -75,24 +78,24 @@ class FerramentasController extends AppController
     /**
      * Edit method
      *
-     * @param string|null $id Ferramenta id.
+     * @param string|null $id Testis id.
      * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function edit($id = null)
     {
-        $ferramenta = $this->Ferramentas->get($id);
+        $teste = $this->Testes->get($id);
         if ($this->request->is(['patch', 'put'])) {
-            $ferramenta = $this->Ferramentas->patchEntity($ferramenta, $this->request->getData());
-            if ($ferramenta_salvo = $this->Ferramentas->save($ferramenta)) {
+            $teste = $this->Testes->patchEntity($teste, $this->request->getData(), ['associated' => 'Subtestes']);
+            if ($teste_salvo = $this->Testes->save($teste)) {
                 $this->set([
-                    'ferramenta' => $ferramenta_salvo,
-                    '_serialize' => 'ferramenta'
+                    'teste' => $teste_salvo,
+                    '_serialize' => 'teste'
                 ]);
             }else{
                 $this->response = $this->response->withStatus(422);
                 $this->set([
-                    'errors' => $ferramenta->errors(),
+                    'errors' => $teste->errors(),
                     '_serialize' => 'errors'
                 ]);
             }
@@ -102,19 +105,19 @@ class FerramentasController extends AppController
     /**
      * Delete method
      *
-     * @param string|null $id Ferramenta id.
+     * @param string|null $id Testis id.
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function delete($id = null)
     {
         $this->request->allowMethod(['delete']);
-        $ferramenta = $this->Ferramentas->get($id);
-        $apagado = $this->Ferramentas->delete($ferramenta);
+        $teste = $this->Testes->get($id);
+        $apagado = $this->Testes->delete($teste);
         $this->set([
-            'ferramenta' => $ferramenta,
+            'teste' => $teste,
             'apagado' => $apagado,
-            '_serialize' => ['ferramenta', 'apagado']
+            '_serialize' => ['teste', 'apagado']
         ]);
     }
 }

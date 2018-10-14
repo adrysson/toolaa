@@ -83,5 +83,6 @@ Router::scope('/api/v1', ['prefix'=>'api/v1'], function(RouteBuilder $routes) {
     $routes->resources('Usuarios');
     $routes->resources('Artigos');
     $routes->resources('Ferramentas');
+    $routes->resources('Testes');
     $routes->fallbacks('InflectedRoute');
 });
