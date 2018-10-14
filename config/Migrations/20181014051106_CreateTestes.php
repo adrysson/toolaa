@@ -23,6 +23,11 @@ class CreateTestes extends AbstractMigration
             'limit' => 11,
             'null' => false,
         ]);
+        $table->addColumn('resultado_id', 'integer', [
+            'default' => null,
+            'limit' => 11,
+            'null' => false,
+        ]);
         $table->addColumn('conteudo', 'text', [
             'default' => null,
             'null' => false,
@@ -34,6 +39,10 @@ class CreateTestes extends AbstractMigration
         $table->addForeignKey('bloco_id', 'testes_blocos', 'id', [
             'delete'=> 'CASCADE',
             'constraint' => 'fk_testes_blocos'
+        ]);
+        $table->addForeignKey('resultado_id', 'testes_resultados', 'id', [
+            'delete'=> 'CASCADE',
+            'constraint' => 'fk_testes_resultados'
         ]);
         $table->create();
     }
