@@ -16,6 +16,7 @@ namespace App\Controller;
 
 use Cake\Controller\Controller;
 use Cake\Event\Event;
+use Cake\Core\Configure;
 
 /**
  * Application Controller
@@ -46,6 +47,8 @@ class AppController extends Controller
         ]);
         $this->loadComponent('Flash');
         $this->viewBuilder()->setHelpers(['Materialize.Form']);
+
+        $this->set('debug', Configure::read('debug'));
         /*
          * Enable the following component for recommended CakePHP security settings.
          * see https://book.cakephp.org/3.0/en/controllers/components/security.html
