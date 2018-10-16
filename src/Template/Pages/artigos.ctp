@@ -8,7 +8,6 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: #eee;
 
 	position: fixed;
 	z-index: 100;
@@ -106,45 +105,63 @@ const artigos = {
             </div>
         </div>
         <div class="center col s12">
-            <ul class="pagination">
-                <li class="prev disabled">
-                    <a href="" onclick="return false;">
+            <ul class="pagination" v-if="pagination.page_count > 1">
+                <li :class="'prev ' + (!pagination.has_prev_page ? 'disabled' : '')" @click.prevent="getArtigos(pagination.has_prev_page ? pagination.current_page - 1 : '')">
+                    <a href="javascript:;">
                         <i class="material-icons">chevron_left</i>
                     </a>
                 </li>
-                <li class="next disabled">
-                    <a href="" onclick="return false;"><i class="material-icons">chevron_right</i>
+				<li @click.prevent="getArtigos(n)" v-for="n in pagination.page_count" :class="(pagination.current_page == n ? 'active' : 'waves-effect')">
+					<a href="javascript:;">{{n}}</a>
+				</li>
+                <li :class="'next ' + (!pagination.has_next_page ? 'disabled' : '')" @click.prevent="getArtigos(pagination.has_next_page ? pagination.current_page + 1 : '')">
+                    <a href="javascript:;">
+						<i class="material-icons">chevron_right</i>
                     </a>
                 </li>
             </ul>
         </div>
-        <p class="right">Página 1 de 1, exibindo 1 registro(s) de um total de 1</p>
+        <p class="right">Página {{pagination.current_page}} de {{pagination.page_count}}, exibindo {{this.artigos.length}} registro(s) de um total de {{pagination.count}}</p>
     </div>
     `,
     data () {
         return {
-            artigos: []
+            artigos: [],
+			pagination: {},
+			auth: JSON.parse(localStorage.getItem('auth'))
         }
     },
+	methods: {
+		getArtigos (page = '') {
+			try{
+	            $.ajax({
+	                type: 'GET',
+	                url: `/api/v1/artigos.json?limit=10${page != '' ? '&&page=' + page : '' }`,
+	                headers: {
+	                    'Authorization': `Bearer ${this.auth.token}`
+	                },
+					beforeSend: () => {
+						$(this.$refs.loading).fadeIn();
+	                    $(this.$refs.loadingWrapper).addClass('active');
+					},
+	                success: response => {
+						console.log(response);
+						this.artigos = response.data;
+						this.pagination = response.pagination
+					},
+	                error: xhr => window.location = '/pages/login',
+	                complete: response => {
+	                    $(this.$refs.loading).fadeOut();
+	                    $(this.$refs.loadingWrapper).removeClass('active');
+	                }
+	            });
+	        } catch {
+	            window.location = '/pages/login';
+	        }
+		}
+	},
     mounted () {
-        const auth = JSON.parse(localStorage.getItem('auth'));
-        try{
-            $.ajax({
-                type: 'GET',
-                url: '/api/v1/artigos.json',
-                headers: {
-                    'Authorization': `Bearer ${auth.token}`
-                },
-                success: data => this.artigos = data,
-                error: xhr => window.location = '/pages/login',
-                complete: response => {
-                    $(this.$refs.loading).fadeOut();
-                    $(this.$refs.loadingWrapper).removeClass('active');
-                }
-            });
-        } catch {
-            window.location = '/pages/login';
-        }
+		this.getArtigos();
     }
 }
 
