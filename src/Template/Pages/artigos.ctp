@@ -121,7 +121,7 @@ const artigos = {
                 </li>
             </ul>
         </div>
-        <p class="right">Página {{pagination.current_page}} de {{pagination.page_count}}, exibindo {{this.artigos.length}} registro(s) de um total de {{pagination.count}}</p>
+        <p class="center">Página {{pagination.current_page}} de {{pagination.page_count}}, exibindo {{this.artigos.length}} registro(s) de um total de {{pagination.count}}</p>
     </div>
     `,
     data () {
