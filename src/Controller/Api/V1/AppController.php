@@ -28,6 +28,8 @@ use Cake\Event\Event;
 class AppController extends Controller
 {
 
+    use \Crud\Controller\ControllerTrait;
+
     /**
      * Initialization hook method.
      *
@@ -37,6 +39,7 @@ class AppController extends Controller
      *
      * @return void
      */
+
     public function initialize()
     {
         parent::initialize();
@@ -63,9 +66,26 @@ class AppController extends Controller
                     'parameter' => '_token',
                 ]
             ],
+            'authError' => 'É necessário realizar o login para ter acesso a esta página',
             'checkAuthIn' => 'Controller.initialize',
         ]);
 
+        $this->loadComponent('Crud.Crud', [
+            'actions' => [
+                'Crud.Index',
+                'Crud.View',
+                'Crud.Add',
+                'Crud.Edit',
+                'Crud.Delete',
+            ],
+            'listeners' => [
+                'Crud.Api',
+                'Crud.RelatedModels',
+                'Crud.ApiPagination',
+                'Crud.ApiQueryLog',
+                'Crud.Search',
+            ]
+        ]);
         /*
          * Enable the following component for recommended CakePHP security settings.
          * see https://book.cakephp.org/3.0/en/controllers/components/security.html

@@ -38,6 +38,19 @@ class ArtigosTable extends Table
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
+        $this->addBehavior('Search.Search');
+
+        $this->searchManager()->add('q', 'Search.Like', [
+            'before' => true,
+            'after' => true,
+            'fieldMode' => 'OR',
+            'comparisan' => 'like',
+            'wildcardAny' => '*',
+            'wildcardOne' => '?',
+            'field' => [
+                'titulo'
+            ],
+        ]);
         $this->belongsTo('Categorias', [
             'className' => 'ArtigosCategorias',
             'foreignKey' => 'categoria_id',

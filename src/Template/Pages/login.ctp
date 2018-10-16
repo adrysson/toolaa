@@ -72,7 +72,20 @@ form#form-login {
                                     </div>
                                     <center>
                                         <div class="row">
-                                            <button type="submit" @click.prevent="login()" name="btn_login" class="col s12 btn btn-large waves-effect indigo">Login</button>
+                                            <button type="submit" @click.prevent="login()" name="btn_login" class="col s12 btn btn-large waves-effect indigo">
+                                                <span ref="textLogin">Login</span>
+                                                <div ref="loadLogin" class="preloader-wrapper" style="display:none">
+                                                    <div class="spinner-layer spinner-blue-only">
+                                                        <div class="circle-clipper left">
+                                                            <div class="circle"></div>
+                                                        </div><div class="gap-patch">
+                                                            <div class="circle"></div>
+                                                        </div><div class="circle-clipper right">
+                                                            <div class="circle"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </button>
                                         </div>
                                     </center>
                                 </form>
@@ -83,7 +96,7 @@ form#form-login {
             </main>
         </div>
         `,
-        data: function() {
+        data () {
             return {
                 loginData: {
                     email: '',
@@ -92,19 +105,34 @@ form#form-login {
             }
         },
         methods: {
-            login: function () {
-                $.post('/api/v1/usuarios/login', this.loginData, function(response){
-                    console.log('sucesso');
-                    console.log(response);
-                })
-                .fail(function(xhr){
-                    console.log('erro');
-                    console.log(xhr);
-                })
-                .always(function(data){
-                    console.log('completo');
-                    console.log(data);
-                });
+            loading (active) {
+                if (active) {
+                    $(this.$refs.textLogin).hide();
+                    $(this.$refs.loadLogin).show();
+                    $(this.$refs.loadLogin).addClass('active');
+                }else{
+                    $(this.$refs.loadLogin).hide();
+                    $(this.$refs.loadLogin).removeClass('active');
+                    $(this.$refs.textLogin).show();
+                }
+            },
+            login () {
+                try {
+                    $.ajax({
+                        url: '/api/v1/usuarios/login.json',
+                        method: 'POST',
+                        data: this.loginData,
+                        beforeSend: () => this.loading(true),
+                        success: data => {
+                            localStorage.setItem('auth', JSON.stringify(data));
+                            window.location = '/pages/artigos';
+                        },
+                        error: xhr => Materialize.toast(xhr.responseText, 4000, 'red'),
+                        complete: response => this.loading(false)
+                    })
+                } catch {
+                    window.location = '/pages/login';
+                }
             }
         }
     }

@@ -48,6 +48,8 @@ class AppController extends Controller
         $this->loadComponent('Flash');
         $this->viewBuilder()->setHelpers(['Materialize.Form']);
 
+        $this->viewBuilder()->setLayout('materialize');
+
         $this->set('debug', Configure::read('debug'));
         /*
          * Enable the following component for recommended CakePHP security settings.

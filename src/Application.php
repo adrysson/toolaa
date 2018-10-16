@@ -35,6 +35,10 @@ class Application extends BaseApplication
      */
     public function bootstrap()
     {
+        $this->addPlugin('Search');
+
+        $this->addPlugin('Crud');
+
         $this->addPlugin('Materialize');
 
         $this->addPlugin('ADmad/JwtAuth');
