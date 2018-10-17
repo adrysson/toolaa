@@ -77,14 +77,6 @@ $this->layout = "Materialize.materialize";
                 </tr>
                 <tr>
                     <td>
-                        <?= __('Testis') ?>
-                    </td>
-                    <td class="right">
-                        <?= $artigo->has('teste') ? $this->Html->link($artigo->teste->id, ['controller' => 'Testes', 'action' => 'view', $artigo->teste->id]) : '' ?>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
                         <?= __('Id') ?>
                     </td>
                     <td class="right">
@@ -93,4 +85,41 @@ $this->layout = "Materialize.materialize";
                 </tr>
             </tbody>
         </table>
+        <?php if (!empty($artigo->testes)): ?>
+            <div class="card-content black-text">
+                <div class="green-text"><h5><?= __('Related Testes') ?></h5></div>
+                <div class="collapsible-header"></div>
+                    <table class="striped responsive-table">
+                        <thead>
+                            <tr>
+                            <th scope="col"><?= __('Id') ?></th>
+                            <th scope="col"><?= __('Artigo Id') ?></th>
+                            <th scope="col"><?= __('Ferramenta Id') ?></th>
+                            <th scope="col"><?= __('Usuario Id') ?></th>
+                            <th scope="col"><?= __('Created') ?></th>
+                            <th scope="col"><?= __('Modified') ?></th>
+                            <th><?= __('Actions') ?></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($artigo->testes as $testes): ?>
+                        <tr>
+                            <td><?= h($testes->id) ?></td>
+                            <td><?= h($testes->artigo_id) ?></td>
+                            <td><?= h($testes->ferramenta_id) ?></td>
+                            <td><?= h($testes->usuario_id) ?></td>
+                            <td><?= h($testes->created) ?></td>
+                            <td><?= h($testes->modified) ?></td>
+                            <td>
+                                <?= $this->Html->link('<i class="material-icons tiny-custom black-text" title="'. __('View') . '" >zoom_in</i>', ['controller' => 'Testes', 'action' => 'view', $testes->id], ['escape' => false]) ?>
+                                <?= $this->Html->link('<i class="material-icons tiny-custom black-text" title="'. __('Edit') . '" >create</i>', ['controller' => 'Testes', 'action' => 'edit', $testes->id], ['escape' => false]) ?>
+                                <?= $this->Form->postLink('<i class="material-icons tiny-custom black-text" title="'. __('Delete') . '" >delete</i>', ['action' => 'delete', $testes->id], ['confirm' => __('Are you sure you want to delete # {0}?', $testes->id), 'escape'=>false]) ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php endif; ?>
+    </div>
 </div>

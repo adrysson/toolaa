@@ -56,8 +56,7 @@ class ArtigosTable extends Table
             'foreignKey' => 'categoria_id',
             'joinType' => 'INNER'
         ]);
-        $this->hasOne('Testes', [
-            'propertyName' => 'teste',
+        $this->hasMany('Testes', [
             'foreignKey' => 'usuario_id'
         ]);
     }
