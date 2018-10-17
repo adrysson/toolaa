@@ -36,9 +36,31 @@ $cakeDescription = 'Toolaa';
     <?= $this->fetch('script') ?>
 
 <body>
-    <nav class="teal">
-        <div class="nav-wrapper">
-            <a href="" class="brand-logo"><?= $this->fetch('title') ?></a>
+    <nav>
+        <a href="javascript:;" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+        <div class="nav-wrapper teal">
+            <a href="javascript:;" class="brand-logo">Toolaa</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="sass.html">Sass</a></li>
+                <li><a href="badges.html">Components</a></li>
+                <li><a href="collapsible.html">JavaScript</a></li>
+            </ul>
+
+              <ul id="slide-out" class="side-nav">
+                <li><div class="user-view">
+                  <div class="background">
+                    <img src="images/office.jpg">
+                  </div>
+                  <a href="#!user"><img class="circle" src="images/yuna.jpg"></a>
+                  <a href="#!name"><span class="white-text name">John Doe</span></a>
+                  <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
+                </div></li>
+                <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
+                <li><a href="#!">Second Link</a></li>
+                <li><div class="divider"></div></li>
+                <li><a class="subheader">Subheader</a></li>
+                <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+              </ul>
         </div>
     </nav>
     <?= $this->Flash->render() ?>
@@ -52,6 +74,14 @@ $cakeDescription = 'Toolaa';
 <script>
     $(document).ready(function() {
         $('select').material_select();
+        $('.button-collapse').sideNav({
+            menuWidth: 300,
+            edge: 'left',
+            closeOnClick: true,
+            draggable: true
+        });
+        $('.button-collapse').sideNav();
+
     });
 
     $('.datepicker').pickadate({

@@ -1,12 +1,3 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Artigo[]|\Cake\Collection\CollectionInterface $artigos
- */
-
- $this->layout = "Materialize.materialize";
-
-?>
 <div class="fixed-action-btn click-to-toggle">
     <a class="btn-floating btn-large red tooltipped" data-tooltip="Clique para ver as opções" data-delay="0" data-position="left">
         <i class="large material-icons">mode_edit</i>
