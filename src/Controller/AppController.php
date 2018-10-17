@@ -55,22 +55,27 @@ class AppController extends Controller
                 'action'=>'index'
             ],
             'logoutRedirect'=>[
-                'controller'=>'Users',
+                'controller'=>'Usuarios',
                 'action'=>'login'
             ],
             'loginAction' => [
-                'controller' => 'Users',
+                'controller' => 'Usuarios',
                 'action' => 'login'
             ],
             'authError' => 'Você não tem acesso a esse local',
             'authenticate' => [
                 'Form' => [
-                    'username' => 'email',
-                    'password' => 'senha',
+                    'userModel' => 'Usuarios',
+                    'fields' => [
+                        'username' => 'email',
+                        'password' => 'senha',
+                    ]
                 ]
             ],
             'storage' => 'Session'
         ]);
+
+        $this->set('debug', Configure::read('debug'));
 
         /*
          * Enable the following component for recommended CakePHP security settings.

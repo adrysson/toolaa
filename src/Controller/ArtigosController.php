@@ -14,6 +14,21 @@ class ArtigosController extends AppController
 {
 
     /**
+     * Index method
+     *
+     * @return \Cake\Http\Response|void
+     */
+    public function index()
+    {
+        $this->paginate = [
+            'contain' => ['Categorias']
+        ];
+        $artigos = $this->paginate($this->Artigos);
+
+        $this->set(compact('artigos'));
+    }
+
+    /**
      * View method
      *
      * @param string|null $id Artigo id.
