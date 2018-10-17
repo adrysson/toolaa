@@ -46,11 +46,32 @@ class AppController extends Controller
             'enableBeforeRedirect' => false,
         ]);
         $this->loadComponent('Flash');
-        $this->viewBuilder()->setHelpers(['Materialize.Form']);
 
         $this->viewBuilder()->setLayout('materialize');
 
-        $this->set('debug', Configure::read('debug'));
+        $this->loadComponent('Auth', [
+            'loginRedirect'=>[
+                'controller'=>'Artigos',
+                'action'=>'index'
+            ],
+            'logoutRedirect'=>[
+                'controller'=>'Users',
+                'action'=>'login'
+            ],
+            'loginAction' => [
+                'controller' => 'Users',
+                'action' => 'login'
+            ],
+            'authError' => 'Você não tem acesso a esse local',
+            'authenticate' => [
+                'Form' => [
+                    'username' => 'email',
+                    'password' => 'senha',
+                ]
+            ],
+            'storage' => 'Session'
+        ]);
+
         /*
          * Enable the following component for recommended CakePHP security settings.
          * see https://book.cakephp.org/3.0/en/controllers/components/security.html

@@ -13,7 +13,6 @@ use App\Controller\Api\V1\AppController;
 class ArtigosController extends AppController
 {
 
-
     public function beforeFilter(\Cake\Event\Event $event)
     {
         $this->Crud->listener('relatedModels')->relatedModels('Categorias', 'index');

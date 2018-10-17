@@ -38,18 +38,13 @@ class TestesController extends AppController
      * @return \Cake\Http\Response|void
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
-    {
-        $teste = $this->Testes->get($id, [
-            'contain' => ['Artigos', 'Ferramentas', 'Usuarios', 'Subtestes']
-        ]);
+     public function view($id) {
+         $this->Crud->on('beforeFind', function (\Cake\Event\Event $event) {
+             $event->subject->query->contain(['Artigos', 'Ferramentas', 'Usuarios', 'Subtestes']);
+         });
 
-        $this->set([
-            'teste'  => $teste,
-            '_serialize' => 'teste',
-        ]);
-    }
-
+         return $this->Crud->execute();
+     }
     /**
      * Add method
      *

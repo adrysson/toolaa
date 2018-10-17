@@ -40,37 +40,10 @@ const artigos = {
         		</div>
         	</div>
         </div>
-        <div class="fixed-action-btn click-to-toggle">
-            <a class="btn-floating btn-large red">
-                <i class="large material-icons">mode_edit</i>
+        <div class="fixed-action-btn">
+            <a class="btn-floating btn-large green modal-trigger waves-effect waves-light" href="#modal-add-artigo" @click="getCategorias()">
+                <i class="large material-icons">add</i>
             </a>
-            <ul>
-                <li>
-                    <a href="/artigos/add" class="btn-floating green" title="New Artigo">
-                        <i class="material-icons">add</i>
-                    </a>
-                </li>
-                <li>
-                    <a href="/categorias" class="btn-floating orange darken-1" title="List Categorias">
-                        <i class="material-icons">list</i>
-                    </a>
-                </li>
-                <li>
-                    <a href="/categorias/add" class="btn-floating orange darken-1" title="New Categoria">
-                        <i class="material-icons">add</i>
-                    </a>
-                </li>
-                <li>
-                    <a href="/testes" class="btn-floating orange darken-1" title="List Testes">
-                        <i class="material-icons">list</i>
-                    </a>
-                </li>
-                <li>
-                    <a href="/testes/add" class="btn-floating orange darken-1" title="New Testis">
-                        <i class="material-icons">add</i>
-                    </a>
-                </li>
-            </ul>
         </div>
         <div class="card darken-1 col s12 m10 offset-m2">
             <div class="card-content black-text">
@@ -122,21 +95,58 @@ const artigos = {
             </ul>
         </div>
         <p class="center">Página {{pagination.current_page}} de {{pagination.page_count}}, exibindo {{this.artigos.length}} registro(s) de um total de {{pagination.count}}</p>
+        <div class="card darken-1 col s12 m10 offset-m2">
+            <div id="modal-add-artigo" class="modal">
+                <div class="modal-content">
+                    <h4 class="card-title green-text">
+                        Adicionar artigo
+                        <a href="javascript:;" class="right modal-close waves-effect waves-green btn-flat"><i class="material-icons">close</i></a>
+                    </h4>
+                    <div class="card-content black-text">
+                        <form method="post" accept-charset="utf-8">
+                            <div class="row">
+                                <div class="col s12 m6 l6">
+                                    <div class="input-field">
+                                        <input type="text" name="titulo" required="required" class="validate" maxlength="255" id="titulo">
+                                        <label data-error="Este campo é obrigatório" for="titulo">Titulo</label>
+                                    </div>
+                                </div>
+                                <div class="col s12 m6 l6">
+                                    <div class="input-field col s12">
+                                        <select name="categoria_id" class="validate" required id="categoria-id">
+                                            <option value="" disabled>Escolha uma categoria</option>
+                                            <option v-for="categoria in categorias" selected :value="categoria.id">{{categoria.nome}}</option>
+                                        </select>
+                                        <label for="categoria-id">Categoria</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s12 m12 l12">
+                                    <button class="btn waves-effect waves-light col s12 m3 l3 offset-s0 offset-m9 offset-l9 green-background" type="submit" @click.prevent="addArtigo()">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     `,
     data () {
         return {
             artigos: [],
 			pagination: {},
+            categorias: [],
 			auth: JSON.parse(localStorage.getItem('auth'))
         }
     },
 	methods: {
-		getArtigos (page = '') {
+		getArtigos (page = 1) {
 			try{
 	            $.ajax({
 	                type: 'GET',
-	                url: `/api/v1/artigos.json?limit=10${page != '' ? '&&page=' + page : '' }`,
+	                url: `/api/v1/artigos.json?limit=10&&page=${page}`,
 	                headers: {
 	                    'Authorization': `Bearer ${this.auth.token}`
 	                },
@@ -145,7 +155,6 @@ const artigos = {
 	                    $(this.$refs.loadingWrapper).addClass('active');
 					},
 	                success: response => {
-						console.log(response);
 						this.artigos = response.data;
 						this.pagination = response.pagination
 					},
@@ -158,10 +167,41 @@ const artigos = {
 	        } catch {
 	            window.location = '/pages/login';
 	        }
-		}
+		},
+        getCategorias () {
+            try{
+	            $.ajax({
+	                type: 'GET',
+	                url: `/api/v1/artigos_categorias.json`,
+	                headers: {
+	                    'Authorization': `Bearer ${this.auth.token}`
+	                },
+					beforeSend: () => {
+						$(this.$refs.loading).fadeIn();
+	                    $(this.$refs.loadingWrapper).addClass('active');
+					},
+	                success: response => {
+                        this.categorias = response.data
+                        setTimeout(() => {
+                            this.$forceUpdate();
+                        }, 1500)
+                    },
+	                error: xhr => window.location = '/pages/login',
+	                complete: response => {
+	                    $(this.$refs.loading).fadeOut();
+	                    $(this.$refs.loadingWrapper).removeClass('active');
+	                }
+	            });
+	        } catch {
+	            window.location = '/pages/login';
+	        }
+        }
 	},
     mounted () {
 		this.getArtigos();
+        $(document).ready(function(){
+          $('.modal').modal();
+        });
     }
 }
 

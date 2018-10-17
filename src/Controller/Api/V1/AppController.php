@@ -83,7 +83,7 @@ class AppController extends Controller
                 'Crud.RelatedModels',
                 'Crud.ApiPagination',
                 'Crud.ApiQueryLog',
-                'Crud.Search',
+                // 'Crud.Search',
             ]
         ]);
         /*
