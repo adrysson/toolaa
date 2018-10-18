@@ -45,8 +45,6 @@
     </div>
 </div>
 <div class="row">
-    <div class="">
-        <?= $this->Form->button(__('Salvar'), ['class' => 'btn waves-effect waves-light col s12 m3 l3 offset-s0 offset-m9 offset-l9 green']) ?>
-        <?= $this->Form->end() ?>
-    </div>
+    <?= $this->Form->button(__('Salvar'), ['class' => 'btn waves-effect waves-light col s12 m3 l3 offset-s0 offset-m9 offset-l9 green']) ?>
+    <?= $this->Form->end() ?>
 </div>

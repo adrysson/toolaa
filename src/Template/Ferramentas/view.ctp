@@ -1,12 +1,4 @@
-<?php
-/**
-* @var \App\View\AppView $this
-* @var \App\Model\Entity\Ferramenta $ferramenta
-*/
-$this->layout = "Materialize.materialize";
-
-?>
-<div class="fixed-action-btn click-to-toggle">
+<div class="fixed-action-btn">
     <a class="btn-floating btn-large red">
         <i class="large material-icons">mode_edit</i>
     </a>
@@ -14,56 +6,38 @@ $this->layout = "Materialize.materialize";
         <li>
             <?= $this->Html->link('<i class="material-icons">mode_edit</i>',
                 ['action' => 'edit', $ferramenta->id],
-                ['class' => 'btn-floating yellow tooltipped', 'data-position' => 'left', 'data-tooltip' =>  __('Edit Ferramenta'), 'escape' => false]) ?>
+                ['class' => 'btn-floating yellow tooltipped', 'data-position' => 'left', 'data-delay' => '0', 'data-tooltip' =>  __('Editar ferramenta {0}', $ferramenta->id), 'escape' => false]) ?>
         </li>
         <li>
             <?= $this->Form->postLink('<i class="material-icons">delete</i>',
                 ['action' => 'delete', $ferramenta->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $ferramenta->id),
-                'class' => 'btn-floating red tooltipped', 'data-position' => 'left', 'data-tooltip' =>  __('Delete Ferramenta'), 'escape' => false]) ?>
+                ['confirm' =>__('Você tem certeza que deseja apagar a ferramenta {0}?', $ferramenta->titulo),
+                'class' => 'btn-floating red tooltipped', 'data-position' => 'left', 'data-delay' => '0', 'data-tooltip' =>  __('Apagar ferramenta {0}', $ferramenta->id), 'escape' => false]) ?>
         </li>
         <li>
             <?= $this->Html->link('<i class="material-icons">list</i>',
                 ['action' => 'index'],
-                ['class' => 'btn-floating blue tooltipped', 'data-position' => 'left', 'data-tooltip' =>  __('List Ferramentas'), 'escape' => false]) ?>
+                ['class' => 'btn-floating blue tooltipped', 'data-position' => 'left', 'data-delay' => '0', 'data-tooltip' =>  __('Ver ferramentas cadastradas'), 'escape' => false]) ?>
         </li>
         <li>
             <?= $this->Html->link('<i class="material-icons">add</i>',
                 ['action' => 'add'],
-                ['class' => 'btn-floating green tooltipped', 'data-position' => 'left', 'data-tooltip' =>  __('New Ferramenta'), 'escape' => false]) ?>
-        </li>
-        <li>
-            <?= $this->Html->link('<i class="material-icons">list</i>',
-                ['controller' => 'Testes', 'action' => 'index'],
-                ['class' => 'btn-floating orange tooltipped', 'data-position' => 'left', 'data-tooltip' =>  __('List Testes'), 'escape' => false]) ?>
-        </li>
-        <li>
-            <?= $this->Html->link('<i class="material-icons">add</i>',
-                ['controller' => 'Testes', 'action' => 'add'],
-                ['class' => 'btn-floating orange tooltipped', 'data-position' => 'left', 'data-tooltip' =>  __('New Testis'), 'escape' => false]) ?>
+                ['class' => 'btn-floating green tooltipped', 'data-position' => 'left', 'data-delay' => '0', 'data-tooltip' =>  __('Cadastrar ferramenta'), 'escape' => false]) ?>
         </li>
     </ul>
 </div>
 <div class="card darken-1 col s12 m10 offset-m2">
     <div class="card-content black-text">
-        <span class="card-title green-text"><?= h($ferramenta->id) ?></span>
+        <span class="card-title green-text">Ferramenta: <?= h($ferramenta->nome) ?></span>
         <table class="striped bordered responsive-table">
             <tbody>
                 <tr>
-                    <td>
-                        <?= __('Nome') ?>
-                    </td>
-                    <td class="right">
-                        <?= h($ferramenta->nome) ?>
-                    </td>
+                    <td>Nome</td>
+                    <td><?= h($ferramenta->nome) ?></td>
                 </tr>
                 <tr>
-                    <td>
-                        <?= __('Id') ?>
-                    </td>
-                    <td class="right">
-                        <?= $this->Number->format($ferramenta->id) ?>
-                    </td>
+                    <td>Código</td>
+                    <td><?= $this->Number->format($ferramenta->id) ?></td>
                 </tr>
             </tbody>
         </table>

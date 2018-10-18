@@ -1,59 +1,81 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Ferramenta[]|\Cake\Collection\CollectionInterface $ferramentas
- */
-
- $this->layout = "Materialize.materialize";
-
-?>
-<div class="fixed-action-btn click-to-toggle">
+<div class="fixed-action-btn">
     <a class="btn-floating btn-large red">
         <i class="large material-icons">mode_edit</i>
     </a>
     <ul>
         <li>
-            <?= $this->Html->link('<i class="material-icons">add</i>',
-            ['action' => 'add'],
-            ['class' => 'btn-floating green', 'title' => __('New Ferramenta'), 'escape' => false]) ?>
-        </li>
-        <li>
-            <?= $this->Html->link('<i class="material-icons">list</i>',
-            ['controller' => 'Testes', 'action' => 'index'],
-            ['class' => 'btn-floating orange darken-1', 'title' => __('List Testes'), 'escape' => false]) ?>
-        </li>
-        <li>
-            <?= $this->Html->link('<i class="material-icons">add</i>',
-            ['controller' => 'Testes', 'action' => 'add'],
-            ['class' => 'btn-floating orange darken-1', 'title' => __('New Testis'), 'escape' => false]) ?>
+            <?= $this->Html->link(
+                '<i class="material-icons">add</i>',
+                ['action' => 'add'],
+                [
+                    'class' => 'btn-floating green tooltipped',
+                    'data-tooltip'=>'Cadastrar ferramenta',
+                    'data-delay'=>'0',
+                    'data-position'=>'left',
+                    'escape' => false,
+                ]
+            ); ?>
         </li>
     </ul>
 </div>
 <div class="card darken-1 col s12 m10 offset-m2">
     <div class="card-content black-text">
-        <span class="card-title green-text"><?= __('Ferramentas') ?></span>
-        <table class="striped responsive-table">
-            <thead>
-                <tr>
-                    <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('nome') ?></th>
-                    <th><?= __('Actions') ?></th>
-                </tr>
-            </thead>
-            <tbody>
-            <?php foreach ($ferramentas as $ferramenta): ?>
-                <tr>
-                    <td><?= $this->Number->format($ferramenta->id) ?></td>
-                    <td><?= h($ferramenta->nome) ?></td>
-                    <td>
-                        <?= $this->Html->link('<i class="material-icons tiny-custom black-text" title="'. __('View') . '" >zoom_in</i>', ['action' => 'view', $ferramenta->id], ['escape' => false]) ?>
-                        <?= $this->Html->link('<i class="material-icons tiny-custom black-text" title="'. __('Edit') . '" >create</i>', ['action' => 'edit', $ferramenta->id], ['escape' => false]) ?>
-                        <?= $this->Form->postLink('<i class="material-icons tiny-custom black-text" title="'. __('Delete') . '" >delete</i>', ['action' => 'delete', $ferramenta->id], ['confirm' => __('Are you sure you want to delete # {0}?', $ferramenta->id), 'escape' => false]) ?>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-            </tbody>
-        </table>
+        <span class="card-title green-text"><h5>Ferramentas</h5></span>
+        <div class="card ">
+            <table class="striped responsive-table">
+                <thead>
+                    <tr>
+                        <th><?= $this->Paginator->sort('id', 'Código') ?></th>
+                        <th><?= $this->Paginator->sort('nome') ?></th>
+                        <th><?= __('Ações') ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($ferramentas as $ferramenta): ?>
+                        <tr>
+                            <td><?= $this->Number->format($ferramenta->id) ?></td>
+                            <td><?= h($ferramenta->nome) ?></td>
+                            <td>
+                                <?= $this->Html->link(
+                                    '<i class="material-icons tiny-custom black-text">zoom_in</i>',
+                                    ['action' => 'view', $ferramenta->id],
+                                    [
+                                        'escape' => false,
+                                        'class' => 'tooltipped',
+                                        'data-tooltip'=>__('Ver dados da ferramenta {0}', $ferramenta->id),
+                                        'data-delay'=>'0',
+                                        'data-position'=>'left',
+                                    ]
+                                ); ?>
+                                <?= $this->Html->link(
+                                    '<i class="material-icons tiny-custom black-text">create</i>',
+                                    ['action' => 'edit', $ferramenta->id],
+                                    [
+                                        'escape' => false,
+                                        'class' => 'tooltipped',
+                                        'data-tooltip'=>__('Editar ferramenta {0}', $ferramenta->id),
+                                        'data-delay'=>'0',
+                                        'data-position'=>'top',
+                                    ]
+                                ); ?>
+                                <?= $this->Form->postLink(
+                                    '<i class="material-icons tiny-custom black-text">delete</i>',
+                                    ['action' => 'delete', $ferramenta->id],
+                                    [
+                                        'confirm' => __('Você tem certeza que deseja apagar o ferramenta {0}?', $ferramenta->nome),
+                                        'escape' => false,
+                                        'class' => 'tooltipped',
+                                        'data-tooltip'=>__('Apagar ferramenta {0}', $ferramenta->id),
+                                        'data-delay'=>'0',
+                                        'data-position'=>'right',
+                                    ]
+                                ); ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 <div class="center col s12">
@@ -66,4 +88,4 @@
     </ul>
 </div>
 
-<p class="right"><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
+<p class="center"><?= $this->Paginator->counter(['format' => __('Página {{page}} de {{pages}}, exibindo {{current}} registro(s) de um total de {{count}}, começando no registro {{start}}, terminando no registro {{end}}')]) ?></p>

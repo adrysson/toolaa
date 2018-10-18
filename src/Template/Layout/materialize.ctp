@@ -41,11 +41,8 @@ $cakeDescription = 'Toolaa';
         <div class="nav-wrapper teal">
             <a href="javascript:;" class="brand-logo">Toolaa</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li>
-                    <?= $this->Html->link('Artigos', ['controller' => 'Artigos', 'action' => 'index']) ?>
-                </li>
-                <li><a href="badges.html">Components</a></li>
-                <li><a href="collapsible.html">JavaScript</a></li>
+                <li><?= $this->Html->link('Artigos', ['controller' => 'Artigos', 'action' => 'index']) ?></li>
+                <li><?= $this->Html->link('Ferramentas', ['controller' => 'Ferramentas', 'action' => 'index']) ?></li>
             </ul>
             <!-- <ul id="slide-out" class="side-nav">
                 <li>
