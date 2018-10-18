@@ -11,7 +11,7 @@
         <li>
             <?= $this->Form->postLink('<i class="material-icons">delete</i>',
                 ['action' => 'delete', $artigo->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $artigo->id),
+                ['confirm' =>__('Você tem certeza que deseja apagar o artigo {0}?', $artigo->titulo),
                 'class' => 'btn-floating red tooltipped', 'data-position' => 'left', 'data-delay' => '0', 'data-tooltip' =>  __('Apagar artigo {0}', $artigo->id), 'escape' => false]) ?>
         </li>
         <li>
@@ -23,11 +23,6 @@
             <?= $this->Html->link('<i class="material-icons">add</i>',
                 ['action' => 'add'],
                 ['class' => 'btn-floating green tooltipped', 'data-position' => 'left', 'data-delay' => '0', 'data-tooltip' =>  __('Cadastrar artigo'), 'escape' => false]) ?>
-        </li>
-        <li>
-            <?= $this->Html->link('<i class="material-icons">add</i>',
-                ['controller' => 'Testes', 'action' => 'add'],
-                ['class' => 'btn-floating orange tooltipped', 'data-position' => 'left', 'data-delay' => '0', 'data-tooltip' =>  __('Cadastrar teste para o artigo {0}', $artigo->id), 'escape' => false]) ?>
         </li>
     </ul>
 </div>

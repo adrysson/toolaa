@@ -94,7 +94,7 @@ class ArtigosController extends AppController
             }
             $this->Flash->error(__('The artigo could not be saved. Please, try again.'));
         }
-        $categorias = $this->Artigos->Categorias->find('list', ['limit' => 200]);
+        $categorias = $this->Artigos->Categorias->find('list', ['limit' => 200, 'keyField' => 'id', 'valueField' => 'nome']);
         $this->set(compact('artigo', 'categorias'));
     }
 
