@@ -61,7 +61,7 @@ class ArtigosController extends AppController
     {
         $artigo = $this->Artigos->newEntity();
         if ($this->request->is('post')) {
-            $artigo = $this->Artigos->patchEntity($artigo, $this->request->getData());
+            $artigo = $this->Artigos->patchEntity($artigo, $this->request->getData(), ['associated' => 'Categorias']);
             if ($this->Artigos->save($artigo)) {
                 $this->Flash->success(__('The artigo has been saved.'));
 
@@ -69,7 +69,7 @@ class ArtigosController extends AppController
             }
             $this->Flash->error(__('The artigo could not be saved. Please, try again.'));
         }
-        $categorias = $this->Artigos->Categorias->find('list', ['limit' => 200]);
+        $categorias = $this->Artigos->Categorias->find('list', ['limit' => 200, 'keyField' => 'id', 'valueField' => 'nome']);
         $this->set(compact('artigo', 'categorias'));
     }
 
