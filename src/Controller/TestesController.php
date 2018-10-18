@@ -27,7 +27,9 @@ class TestesController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Artigos', 'Ferramentas', 'Usuarios']
+            'contain' => ['Artigos', 'Ferramentas', 'Usuarios'],
+            'limit' => 5,
+            'order' => ['id' => 'desc']
         ];
         $testes = $this->paginate($this->Testes);
 
@@ -43,11 +45,11 @@ class TestesController extends AppController
      */
     public function view($id = null)
     {
-        $testis = $this->Testes->get($id, [
-            'contain' => ['Artigos', 'Ferramentas', 'Usuarios', 'Subtestes']
+        $teste = $this->Testes->get($id, [
+            'contain' => ['Artigos', 'Ferramentas', 'Usuarios', 'Subtestes' => ['Tipos', 'Resultados']]
         ]);
 
-        $this->set('testis', $testis);
+        $this->set('teste', $teste);
     }
 
     /**
@@ -57,9 +59,9 @@ class TestesController extends AppController
      */
     public function add()
     {
-        $testis = $this->Testes->newEntity();
+        $teste = $this->Testes->newEntity();
         if ($this->request->is('post')) {
-            $testis = $this->Testes->patchEntity($testis, $this->request->getData());
+            $testis = $this->Testes->patchEntity($testis, $this->request->getData(), ['associated' => 'Subtestes']);
             if ($this->Testes->save($testis)) {
                 $this->Flash->success(__('The testis has been saved.'));
 
@@ -67,10 +69,11 @@ class TestesController extends AppController
             }
             $this->Flash->error(__('The testis could not be saved. Please, try again.'));
         }
-        $artigos = $this->Testes->Artigos->find('list', ['limit' => 200]);
-        $ferramentas = $this->Testes->Ferramentas->find('list', ['limit' => 200]);
-        $usuarios = $this->Testes->Usuarios->find('list', ['limit' => 200]);
-        $this->set(compact('testis', 'artigos', 'ferramentas', 'usuarios'));
+        $artigos = $this->Testes->Artigos->find('list', ['limit' => 200, 'keyField' => 'id', 'valueField' => 'titulo', 'order' => ['titulo' => 'asc']]);
+        $ferramentas = $this->Testes->Ferramentas->find('list', ['limit' => 200, 'keyField' => 'id', 'valueField' => 'nome', 'order' => ['nome' => 'asc']]);
+        $usuarios = $this->Testes->Usuarios->find('list', ['limit' => 200, 'keyField' => 'id', 'valueField' => 'nome', 'order' => ['nome' => 'asc']]);
+        $resultados = $this->Testes->Subtestes->Resultados->find('list', ['limit' => 200, 'keyField' => 'id', 'valueField' => 'nome', 'order' => ['nome' => 'asc']]);
+        $this->set(compact('teste', 'artigos', 'ferramentas', 'usuarios', 'resultados'));
     }
 
     /**
@@ -82,8 +85,8 @@ class TestesController extends AppController
      */
     public function edit($id = null)
     {
-        $testis = $this->Testes->get($id, [
-            'contain' => []
+        $teste = $this->Testes->get($id, [
+            'contain' => ['Subtestes']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $testis = $this->Testes->patchEntity($testis, $this->request->getData());
@@ -94,10 +97,11 @@ class TestesController extends AppController
             }
             $this->Flash->error(__('The testis could not be saved. Please, try again.'));
         }
-        $artigos = $this->Testes->Artigos->find('list', ['limit' => 200]);
-        $ferramentas = $this->Testes->Ferramentas->find('list', ['limit' => 200]);
-        $usuarios = $this->Testes->Usuarios->find('list', ['limit' => 200]);
-        $this->set(compact('testis', 'artigos', 'ferramentas', 'usuarios'));
+        $artigos = $this->Testes->Artigos->find('list', ['limit' => 200, 'keyField' => 'id', 'valueField' => 'titulo', 'order' => ['titulo' => 'asc']]);
+        $ferramentas = $this->Testes->Ferramentas->find('list', ['limit' => 200, 'keyField' => 'id', 'valueField' => 'nome', 'order' => ['nome' => 'asc']]);
+        $usuarios = $this->Testes->Usuarios->find('list', ['limit' => 200, 'keyField' => 'id', 'valueField' => 'nome', 'order' => ['nome' => 'asc']]);
+        $resultados = $this->Testes->Subtestes->Resultados->find('list', ['limit' => 200, 'keyField' => 'id', 'valueField' => 'nome', 'order' => ['nome' => 'asc']]);
+        $this->set(compact('teste', 'artigos', 'ferramentas', 'usuarios', 'resultados'));
     }
 
     /**

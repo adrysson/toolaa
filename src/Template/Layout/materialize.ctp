@@ -43,6 +43,7 @@ $cakeDescription = 'Toolaa';
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><?= $this->Html->link('Artigos', ['controller' => 'Artigos', 'action' => 'index']) ?></li>
                 <li><?= $this->Html->link('Ferramentas', ['controller' => 'Ferramentas', 'action' => 'index']) ?></li>
+                <li><?= $this->Html->link('Testes', ['controller' => 'Testes', 'action' => 'index']) ?></li>
             </ul>
             <!-- <ul id="slide-out" class="side-nav">
                 <li>
