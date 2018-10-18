@@ -61,15 +61,15 @@ class ArtigosController extends AppController
     {
         $artigo = $this->Artigos->newEntity();
         if ($this->request->is('post')) {
-            $artigo = $this->Artigos->patchEntity($artigo, $this->request->getData(), ['associated' => 'Categorias']);
+            $artigo = $this->Artigos->patchEntity($artigo, $this->request->getData());
             if ($this->Artigos->save($artigo)) {
-                $this->Flash->success(__('The artigo has been saved.'));
+                $this->Flash->success(__('O artigo foi salvo com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The artigo could not be saved. Please, try again.'));
+            $this->Flash->error(__('Devido a um erro o artigo não foi salvo. Tente novamente.'));
         }
-        $categorias = $this->Artigos->Categorias->find('list', ['limit' => 200, 'keyField' => 'id', 'valueField' => 'nome']);
+        $categorias = $this->Artigos->Categorias->find('list', ['limit' => 200, 'keyField' => 'id', 'valueField' => 'nome', 'order'=>['nome' => 'asc']]);
         $this->set(compact('artigo', 'categorias'));
     }
 
@@ -88,13 +88,13 @@ class ArtigosController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $artigo = $this->Artigos->patchEntity($artigo, $this->request->getData());
             if ($this->Artigos->save($artigo)) {
-                $this->Flash->success(__('The artigo has been saved.'));
+                $this->Flash->success(__('O artigo foi salvo com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The artigo could not be saved. Please, try again.'));
+            $this->Flash->error(__('Devido a um erro o artigo não foi salvo. Tente novamente.'));
         }
-        $categorias = $this->Artigos->Categorias->find('list', ['limit' => 200, 'keyField' => 'id', 'valueField' => 'nome']);
+        $categorias = $this->Artigos->Categorias->find('list', ['limit' => 200, 'keyField' => 'id', 'valueField' => 'nome', 'order'=>['nome' => 'asc']]);
         $this->set(compact('artigo', 'categorias'));
     }
 
@@ -110,9 +110,9 @@ class ArtigosController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $artigo = $this->Artigos->get($id);
         if ($this->Artigos->delete($artigo)) {
-            $this->Flash->success(__('The artigo has been deleted.'));
+            $this->Flash->success(__('O artigo foi apagado com sucesso.'));
         } else {
-            $this->Flash->error(__('The artigo could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Devido a um erro o artigo não foi apagado. Tente novamente.'));
         }
 
         return $this->redirect(['action' => 'index']);
