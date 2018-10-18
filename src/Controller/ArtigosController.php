@@ -27,7 +27,9 @@ class ArtigosController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Categorias']
+            'contain' => 'Categorias',
+            'limit' => 5,
+            'order' => ['Artigos.id' => 'desc']
         ];
         $artigos = $this->paginate($this->Artigos);
 
@@ -44,7 +46,7 @@ class ArtigosController extends AppController
     public function view($id = null)
     {
         $artigo = $this->Artigos->get($id, [
-            'contain' => ['Categorias', 'Testes']
+            'contain' => ['Categorias', 'Testes' => ['Ferramentas', 'Usuarios']]
         ]);
 
         $this->set('artigo', $artigo);

@@ -47,7 +47,7 @@ body {
 
                     <div class='row'>
                         <div class='input-field col s12'>
-                            <?= $this->Form->control('email', ['class' => 'validate']) ?>
+                            <?= $this->Form->control('email', ['type' => 'email', 'class' => 'validate']) ?>
                         </div>
                     </div>
 

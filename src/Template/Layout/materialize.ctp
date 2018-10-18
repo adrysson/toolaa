@@ -21,8 +21,8 @@ $cakeDescription = 'Toolaa';
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <?= $this->Html->css('Materialize.materialize.min.css') ?>
-    <?= $this->Html->css('Materialize.materialize.css') ?>
-    <?= $this->Html->css('Materialize.custom.css') ?>
+    <!-- <?= $this->Html->css('Materialize.materialize.css') ?> -->
+    <!-- <?= $this->Html->css('Materialize.custom.css') ?> -->
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
@@ -41,26 +41,29 @@ $cakeDescription = 'Toolaa';
         <div class="nav-wrapper teal">
             <a href="javascript:;" class="brand-logo">Toolaa</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="sass.html">Sass</a></li>
+                <li>
+                    <?= $this->Html->link('Artigos', ['controller' => 'Artigos', 'action' => 'index']) ?>
+                </li>
                 <li><a href="badges.html">Components</a></li>
                 <li><a href="collapsible.html">JavaScript</a></li>
             </ul>
-
-              <ul id="slide-out" class="side-nav">
-                <li><div class="user-view">
-                  <div class="background">
-                    <img src="images/office.jpg">
-                  </div>
-                  <a href="#!user"><img class="circle" src="images/yuna.jpg"></a>
-                  <a href="#!name"><span class="white-text name">John Doe</span></a>
-                  <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
-                </div></li>
+            <!-- <ul id="slide-out" class="side-nav">
+                <li>
+                    <div class="user-view">
+                        <div class="background">
+                            <img src="images/office.jpg">
+                        </div>
+                        <a href="#!user"><?= $this->Html->image('user.svg', ['class'=>'circle']) ?></a>
+                        <a href="#!name"><span class="white-text name">John Doe</span></a>
+                        <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
+                    </div>
+                </li>
                 <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
                 <li><a href="#!">Second Link</a></li>
                 <li><div class="divider"></div></li>
                 <li><a class="subheader">Subheader</a></li>
                 <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
-              </ul>
+            </ul> -->
         </div>
     </nav>
     <?= $this->Flash->render() ?>
