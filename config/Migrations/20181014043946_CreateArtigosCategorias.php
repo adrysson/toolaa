@@ -18,6 +18,7 @@ class CreateArtigosCategorias extends AbstractMigration
             'limit' => 255,
             'null' => false,
         ]);
+        $table->addIndex('nome', ['unique' => true]);
         $table->create();
     }
 }

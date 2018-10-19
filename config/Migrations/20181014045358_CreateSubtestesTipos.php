@@ -18,6 +18,7 @@ class CreateSubtestesTipos extends AbstractMigration
             'limit' => 50,
             'null' => false,
         ]);
+        $table->addIndex('nome', ['unique' => true]);
         $table->create();
     }
 }

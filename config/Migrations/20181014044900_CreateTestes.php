@@ -48,6 +48,7 @@ class CreateTestes extends AbstractMigration
             'delete'=> 'CASCADE',
             'constraint' => 'fk_testes_usuarios'
         ]);
+        $table->addIndex(['artigo_id', 'ferramenta_id', 'usuario_id'], ['unique' => true]);
         $table->create();
     }
 }

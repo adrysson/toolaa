@@ -18,6 +18,7 @@ class CreateSubtestesResultados extends AbstractMigration
             'limit' => 100,
             'null' => false,
         ]);
+        $table->addIndex('nome', ['unique' => true]);
         $table->create();
     }
 }

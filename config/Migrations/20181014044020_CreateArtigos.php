@@ -27,6 +27,7 @@ class CreateArtigos extends AbstractMigration
             'delete'=> 'CASCADE',
             'constraint' => 'fk_artigos_categorias'
         ]);
+        $table->addIndex('titulo', ['unique' => true]);
         $table->create();
     }
 }

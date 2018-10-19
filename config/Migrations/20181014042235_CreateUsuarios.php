@@ -54,6 +54,7 @@ class CreateUsuarios extends AbstractMigration
             'delete'=> 'CASCADE',
             'constraint' => 'fk_usuarios_perfis'
         ]);
+        $table->addIndex('email', ['unique' => true]);
         $table->create();
     }
 }

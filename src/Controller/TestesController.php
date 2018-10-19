@@ -61,13 +61,13 @@ class TestesController extends AppController
     {
         $teste = $this->Testes->newEntity();
         if ($this->request->is('post')) {
-            $testis = $this->Testes->patchEntity($testis, $this->request->getData(), ['associated' => 'Subtestes']);
-            if ($this->Testes->save($testis)) {
-                $this->Flash->success(__('The testis has been saved.'));
+            $teste = $this->Testes->patchEntity($teste, $this->request->getData(), ['associated' => 'Subtestes']);
+            if ($this->Testes->save($teste)) {
+                $this->Flash->success(__('O teste foi salvo com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The testis could not be saved. Please, try again.'));
+            $this->Flash->error(__('Devido a um erro não foi possível salvar o teste. Tente novamente.'));
         }
         $artigos = $this->Testes->Artigos->find('list', ['limit' => 200, 'keyField' => 'id', 'valueField' => 'titulo', 'order' => ['titulo' => 'asc']]);
         $ferramentas = $this->Testes->Ferramentas->find('list', ['limit' => 200, 'keyField' => 'id', 'valueField' => 'nome', 'order' => ['nome' => 'asc']]);
@@ -89,13 +89,13 @@ class TestesController extends AppController
             'contain' => ['Subtestes']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $testis = $this->Testes->patchEntity($testis, $this->request->getData());
-            if ($this->Testes->save($testis)) {
-                $this->Flash->success(__('The testis has been saved.'));
+            $teste = $this->Testes->patchEntity($teste, $this->request->getData());
+            if ($this->Testes->save($teste)) {
+                $this->Flash->success(__('O teste foi salvo com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The testis could not be saved. Please, try again.'));
+            $this->Flash->error(__('Devido a um erro não foi possível salvar o teste. Tente novamente.'));
         }
         $artigos = $this->Testes->Artigos->find('list', ['limit' => 200, 'keyField' => 'id', 'valueField' => 'titulo', 'order' => ['titulo' => 'asc']]);
         $ferramentas = $this->Testes->Ferramentas->find('list', ['limit' => 200, 'keyField' => 'id', 'valueField' => 'nome', 'order' => ['nome' => 'asc']]);
@@ -114,11 +114,11 @@ class TestesController extends AppController
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $testis = $this->Testes->get($id);
-        if ($this->Testes->delete($testis)) {
-            $this->Flash->success(__('The testis has been deleted.'));
+        $teste = $this->Testes->get($id);
+        if ($this->Testes->delete($teste)) {
+            $this->Flash->success(__('O teste foi apagado com sucesso.'));
         } else {
-            $this->Flash->error(__('The testis could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Devido a um erro não foi possível salvar o teste. Tente novamente.'));
         }
 
         return $this->redirect(['action' => 'index']);

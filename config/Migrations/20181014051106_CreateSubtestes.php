@@ -44,6 +44,7 @@ class CreateSubtestes extends AbstractMigration
             'delete'=> 'CASCADE',
             'constraint' => 'fk_subtestes_resultados'
         ]);
+        $table->addIndex(['tipo_id', 'teste_id'], ['unique' => true]);
         $table->create();
     }
 }
