@@ -61,7 +61,7 @@ class TestesController extends AppController
     {
         $teste = $this->Testes->newEntity();
         if ($this->request->is('post')) {
-            $teste = $this->Testes->patchEntity($teste, $this->request->getData(), ['associated' => 'Subtestes']);
+            $teste = $this->Testes->patchEntity($teste, $this->request->getData(), ['associated' => ['Artigos' => ['associated' => 'Categorias'], 'Ferramentas', 'Subtestes']]);
             if ($this->Testes->save($teste)) {
                 $this->Flash->success(__('O teste foi salvo com sucesso.'));
 
@@ -73,7 +73,8 @@ class TestesController extends AppController
         $ferramentas = $this->Testes->Ferramentas->find('list', ['limit' => 200, 'keyField' => 'id', 'valueField' => 'nome', 'order' => ['nome' => 'asc']]);
         $usuarios = $this->Testes->Usuarios->find('list', ['limit' => 200, 'keyField' => 'id', 'valueField' => 'nome', 'order' => ['nome' => 'asc']]);
         $resultados = $this->Testes->Subtestes->Resultados->find('list', ['limit' => 200, 'keyField' => 'id', 'valueField' => 'nome', 'order' => ['nome' => 'asc']]);
-        $this->set(compact('teste', 'artigos', 'ferramentas', 'usuarios', 'resultados'));
+        $categorias = $this->Testes->Artigos->Categorias->find('list', ['limit' => 200, 'keyField' => 'id', 'valueField' => 'nome', 'order'=>['nome' => 'asc']]);
+        $this->set(compact('teste', 'artigos', 'ferramentas', 'usuarios', 'resultados', 'categorias'));
     }
 
     /**

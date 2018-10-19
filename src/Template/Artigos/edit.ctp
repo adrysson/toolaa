@@ -21,5 +21,3 @@
         <?= $this->element('Artigos/form', ['tipo' => 'Editar']) ?>
     </div>
 </div>
-
-<?= $this->Html->script('forms/artigos', ['block'=>'script']) ?>

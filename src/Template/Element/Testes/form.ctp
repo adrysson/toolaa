@@ -1,22 +1,75 @@
 <?= $this->Form->create($teste) ?>
 <span class="card-title green-text"><h5><?= $tipo ?> teste</h5></span>
 <div class="row">
-    <div class="col s12 m6 l3">
-        <div class="input-field">
-            <?= $this->Form->control('artigo_id', ['options' => $artigos, 'empty'=> 'Escolha um artigo']) ?>
+
+    <!-- Inputs de adição/listagem de ferramentas -->
+    <div class="col s10 m3 l3" id="container-ferramenta">
+        <?php if (!$ferramentas->isEmpty()): ?>
+            <div class="input-field" id="input-ferramenta-id">
+                <?= $this->Form->control('ferramenta_id', ['options' => $ferramentas]) ?>
+            </div>
+        <?php endif; ?>
+        <div class="input-field" id="input-ferramenta-nome">
+            <?= $this->Form->control('ferramenta.nome', ['label' => 'Ferramenta']) ?>
         </div>
     </div>
-    <div class="col s12 m6 l3">
-        <div class="input-field">
-            <?= $this->Form->control('ferramenta_id', ['options' => $ferramentas, 'empty'=> 'Escolha uma ferramenta']) ?>
+
+    <!-- Botões de adição/listagem de ferramentas -->
+    <div class="col s1 m1 l1">
+        <a href="javascript:;" class="btn-floating green tooltipped" id="add-ferramenta" data-delay="0" data-tooltip="Inserir ferramenta não listada" onclick="addFerramenta()" style="display:none">
+            <i class="material-icons">add</i>
+        </a>
+        <a href="javascript:;" class="btn-floating teal tooltipped" id="list-ferramentas" data-delay="0" data-tooltip="Listar ferramentas novamente" onclick="listFerramentas()" style="display:none">
+            <i class="material-icons">refresh</i>
+        </a>
+    </div>
+
+    <!-- Inputs de adição/listagem de artigos-->
+    <div class="col s10 m3 l3" id="container-artigo">
+        <?php if (!$artigos->isEmpty()): ?>
+            <div class="input-field" id="input-artigo-id">
+                <?= $this->Form->control('artigo_id', ['options' => $artigos]) ?>
+            </div>
+        <?php endif; ?>
+        <div class="input-field" id="input-artigo-nome">
+            <?= $this->Form->control('artigo.titulo', ['label' => 'Artigo']) ?>
         </div>
     </div>
-    <!-- <div class="col s12 m6 l3">
-        <div class="input-field">
-            <?= $this->Form->control('usuario_id', ['options' => $usuarios]) ?>
+
+    <!-- Botões de adição/listagem de artigos e categorias de artigos -->
+    <div class="col s1 m1 l1">
+        <a href="javascript:;" class="btn-floating green tooltipped" id="add-artigo" data-delay="0" data-tooltip="Inserir artigo não listado" onclick="addArtigo()" style="display:none">
+            <i class="material-icons">add</i>
+        </a>
+        <a href="javascript:;" class="btn-floating teal tooltipped" id="list-artigos" data-delay="0" data-tooltip="Listar artigos novamente" onclick="listArtigos()" style="display:none">
+            <i class="material-icons">refresh</i>
+        </a>
+    </div>
+
+    <!-- Inputs de adição/listagem de categorias de artigos -->
+    <div class="col s10 m3 l3" id="container-artigo-categoria">
+        <?php if (!$categorias->isEmpty()): ?>
+            <div class="input-field" id="input-artigo-categoria-id">
+                <?= $this->Form->control('artigo.categoria_id', ['options' => $categorias, 'label' => 'Categoria do artigo']) ?>
+            </div>
+        <?php endif ?>
+        <div class="input-field" id="input-artigo-categoria-nome">
+            <?= $this->Form->control('artigo.categoria.nome', ['label' => 'Categoria do artigo']) ?>
         </div>
-    </div> -->
+    </div>
+
+    <!-- Botões de adição/listagem de artigos e categorias de artigos -->
+    <div class="col s1 m1 l1">
+        <a href="javascript:;" class="btn-floating green tooltipped" id="add-artigo-categoria" data-delay="0" data-tooltip="Inserir categoria não listada" onclick="addArtigoCategoria()" style="display:none">
+            <i class="material-icons">add</i>
+        </a>
+        <a href="javascript:;" class="btn-floating teal tooltipped" id="list-artigos-categorias" data-delay="0" data-tooltip="Listar categorias novamente" onclick="listArtigosCategorias()" style="display:none">
+            <i class="material-icons">refresh</i>
+        </a>
+    </div>
+
     <?= $this->Form->control('usuario_id', ['value' => $this->request->getSession()->read('Auth.User.id'), 'type' => 'hidden']) ?>
+
 </div>
 <div class="row">
     <div class="black-text">
@@ -94,3 +147,5 @@
         <?= $this->Form->end() ?>
     </div>
 </div>
+
+<?= $this->Html->script('forms/testes', ['block'=>'script']) ?>

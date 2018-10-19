@@ -54,7 +54,7 @@ class TestesController extends AppController
     {
         $teste = $this->Testes->newEntity();
         if ($this->request->is('post')) {
-            $teste = $this->Testes->patchEntity($teste, $this->request->getData(), ['associated' => 'Subtestes']);
+            $teste = $this->Testes->patchEntity($teste, $this->request->getData(), ['associated' => ['Subtestes', 'Ferramentas', 'Artigos' => ['associated' => 'Categorias']]]);
             if ($teste_salvo = $this->Testes->save($teste)) {
                 $this->set([
                     'teste' => $teste_salvo,

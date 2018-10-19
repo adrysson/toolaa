@@ -15,5 +15,3 @@
         <?= $this->element('Artigos/form', ['tipo' => 'Cadastrar']) ?>
     </div>
 </div>
-
-<?= $this->Html->script('forms/artigos', ['block'=>'script']) ?>
