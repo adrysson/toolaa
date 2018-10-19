@@ -73,7 +73,7 @@
 </div>
 <div class="row">
     <div class="black-text">
-        <div class="card">
+        <div class="card teal lighten-5">
             <div class="card-content">
                 <div class="row">
                     <div class="col s12 m6 l4">
