@@ -20,3 +20,7 @@
 .clearfix {
     clear: inherit;
 }
+
+td {
+    padding: 5px !important;
+}

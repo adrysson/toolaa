@@ -68,7 +68,7 @@
                             <tr>
                                 <th scope="col">Tipo</th>
                                 <th scope="col">Resultado</th>
-                                <th><?= __('Actions') ?></th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody>

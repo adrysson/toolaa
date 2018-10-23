@@ -46,6 +46,7 @@ class SubtestesTable extends Table
             'joinType' => 'INNER'
         ]);
         $this->belongsTo('Testes', [
+            'propertyName' => 'teste',
             'foreignKey' => 'teste_id',
             'joinType' => 'INNER'
         ]);
