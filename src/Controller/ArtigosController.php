@@ -29,7 +29,7 @@ class ArtigosController extends AppController
         $this->paginate = [
             'contain' => 'Categorias',
             'limit' => 5,
-            'order' => ['Artigos.id' => 'desc']
+            'order' => ['id' => 'desc']
         ];
         $artigos = $this->paginate($this->Artigos);
 

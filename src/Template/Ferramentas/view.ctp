@@ -26,57 +26,86 @@
         </li>
     </ul>
 </div>
-<div class="card darken-1 col s12 m10 offset-m2">
+<div class="card grey lighten-4 col s12 m10 offset-m2">
     <div class="card-content black-text">
-        <span class="card-title green-text">Ferramenta: <?= h($ferramenta->nome) ?></span>
-        <table class="striped bordered responsive-table">
-            <tbody>
-                <tr>
-                    <td>Nome</td>
-                    <td><?= h($ferramenta->nome) ?></td>
-                </tr>
-                <tr>
-                    <td>Código</td>
-                    <td><?= $this->Number->format($ferramenta->id) ?></td>
-                </tr>
-            </tbody>
-        </table>
+        <span class="card-title green-text"><h5>Ferramenta: <?= h($ferramenta->nome) ?></h5></span>
+        <div class="card">
+            <table class="bordered responsive-table">
+                <tbody>
+                    <tr>
+                        <td>Nome</td>
+                        <td><?= h($ferramenta->nome) ?></td>
+                    </tr>
+                    <tr>
+                        <td>Código</td>
+                        <td><?= $this->Number->format($ferramenta->id) ?></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
         <?php if (!empty($ferramenta->testes)): ?>
-            <div class="card-content black-text">
-                <div class="green-text"><h5><?= __('Related Testes') ?></h5></div>
-                <div class="collapsible-header"></div>
-                    <table class="striped responsive-table">
-                        <thead>
-                            <tr>
-                            <th scope="col"><?= __('Id') ?></th>
-                            <th scope="col"><?= __('Artigo Id') ?></th>
-                            <th scope="col"><?= __('Ferramenta Id') ?></th>
-                            <th scope="col"><?= __('Usuario Id') ?></th>
-                            <th scope="col"><?= __('Created') ?></th>
-                            <th scope="col"><?= __('Modified') ?></th>
-                            <th><?= __('Actions') ?></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php foreach ($ferramenta->testes as $testes): ?>
-                        <tr>
-                            <td><?= h($testes->id) ?></td>
-                            <td><?= h($testes->artigo_id) ?></td>
-                            <td><?= h($testes->ferramenta_id) ?></td>
-                            <td><?= h($testes->usuario_id) ?></td>
-                            <td><?= h($testes->created) ?></td>
-                            <td><?= h($testes->modified) ?></td>
-                            <td><?= $product->has('category') ? $this->Html->link($product->category->name, ['controller' => 'Categories', 'action' => 'view', $product->category->id]) : '' ?></td>
-                            <td>
-                            <td>
-                                <?= $this->Html->link('<i class="material-icons tiny-custom black-text" title="'. __('View') . '" >zoom_in</i>', ['controller' => 'Testes', 'action' => 'view', $testes->id]) ?>
-                                <?= $this->Html->link('<i class="material-icons tiny-custom black-text" title="'. __('Edit') . '" >create</i>', ['controller' => 'Testes', 'action' => 'edit', $testes->id]) ?>
-                                <?= $this->Form->postLink('<i class="material-icons tiny-custom black-text" title="'. __('Delete') . '" >delete</i>', ['action' => 'delete', $testes->id], ['confirm' => __('Are you sure you want to delete # {0}?', $testes->id)]) ?>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                    </tbody>
-                </table>
+            <div class="card black-text">
+                <div class="card-content">
+                    <div class="green-text"><h5>Testes da ferramenta</h5></div>
+                    <div class="card">
+                        <table class="striped responsive-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Código</th>
+                                    <th scope="col">Artigo</th>
+                                    <th scope="col">Usuário</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($ferramenta->testes as $teste): ?>
+                                    <tr>
+                                        <td><?= h($teste->id) ?></td>
+                                        <td><?= h($teste->artigo->titulo) ?></td>
+                                        <td><?= h($teste->usuario->nome) ?></td>
+                                        <td>
+                                            <?= $this->Html->link(
+                                                '<i class="material-icons tiny-custom black-text">zoom_in</i>',
+                                                ['controller' => 'Testes', 'action' => 'view', $teste->id],
+                                                [
+                                                    'escape' => false,
+                                                    'class' => 'tooltipped',
+                                                    'data-tooltip'=>__('Ver dados do teste {0}', $teste->id),
+                                                    'data-delay'=>'0',
+                                                    'data-position'=>'left',
+                                                ]
+                                            ); ?>
+                                            <?= $this->Html->link(
+                                                '<i class="material-icons tiny-custom black-text">create</i>',
+                                                ['controller' => 'Testes', 'action' => 'edit', $teste->id],
+                                                [
+                                                    'escape' => false,
+                                                    'class' => 'tooltipped',
+                                                    'data-tooltip'=>__('Editar teste {0}', $teste->id),
+                                                    'data-delay'=>'0',
+                                                    'data-position'=>'top',
+                                                ]
+                                            ); ?>
+                                            <?= $this->Form->postLink(
+                                                '<i class="material-icons tiny-custom black-text">delete</i>',
+                                                ['controller' => 'Testes', 'action' => 'delete', $teste->id],
+                                                [
+                                                    'confirm' => __('Você tem certeza que deseja apagar o teste {0}?', $teste->id),
+                                                    'escape' => false,
+                                                    'class' => 'tooltipped',
+                                                    'data-tooltip'=>__('Apagar teste {0}', $teste->id),
+                                                    'data-delay'=>'0',
+                                                    'data-position'=>'right',
+                                                ]
+                                            ); ?>
+                                        </td>
+                                    </tr>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
             </div>
         <?php endif; ?>
     </div>

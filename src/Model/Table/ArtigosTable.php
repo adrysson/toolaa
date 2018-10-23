@@ -46,7 +46,7 @@ class ArtigosTable extends Table
             'joinType' => 'INNER'
         ]);
         $this->hasMany('Testes', [
-            'foreignKey' => 'usuario_id'
+            'foreignKey' => 'artigo_id'
         ]);
     }
 

@@ -26,6 +26,10 @@ class FerramentasController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'limit' => 5,
+            'order' => ['id' => 'desc']
+        ];
         $ferramentas = $this->paginate($this->Ferramentas);
 
         $this->set(compact('ferramentas'));
@@ -41,7 +45,7 @@ class FerramentasController extends AppController
     public function view($id = null)
     {
         $ferramenta = $this->Ferramentas->get($id, [
-            'contain' => ['Testes']
+            'contain' => ['Testes' => ['Artigos', 'Usuarios']]
         ]);
 
         $this->set('ferramenta', $ferramenta);

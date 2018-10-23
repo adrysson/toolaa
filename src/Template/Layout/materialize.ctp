@@ -22,8 +22,7 @@ $cakeDescription = 'Toolaa';
 
     <?= $this->Html->css('Materialize.materialize.min.css') ?>
     <!-- <?= $this->Html->css('Materialize.materialize.css') ?> -->
-    <!-- <?= $this->Html->css('Materialize.custom.css') ?> -->
-
+    <?= $this->Html->css('custom.css') ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 
@@ -39,11 +38,16 @@ $cakeDescription = 'Toolaa';
     <nav>
         <a href="javascript:;" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
         <div class="nav-wrapper teal">
-            <a href="javascript:;" class="brand-logo">Toolaa</a>
+            <a href="/testes" class="brand-logo">Toolaa</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><?= $this->Html->link('Artigos', ['controller' => 'Artigos', 'action' => 'index']) ?></li>
                 <li><?= $this->Html->link('Ferramentas', ['controller' => 'Ferramentas', 'action' => 'index']) ?></li>
                 <li><?= $this->Html->link('Testes', ['controller' => 'Testes', 'action' => 'index']) ?></li>
+                <li>
+                    <a class="dropdown-button" href="#!" data-activates="dropdown" data-beloworigin="true">
+                        <i class="material-icons">account_circle</i><i class="mdi-navigation-arrow-drop-down right"></i>
+                    </a>
+                </li>
             </ul>
             <!-- <ul id="slide-out" class="side-nav">
                 <li>
@@ -62,6 +66,14 @@ $cakeDescription = 'Toolaa';
                 <li><a class="subheader">Subheader</a></li>
                 <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
             </ul> -->
+            <ul id="dropdown" class="dropdown-content collection">
+                <li class="collection-item avatar">
+                    <!-- <img src="http://materializecss.com/images/yuna.jpg" alt="" class="circle"> -->
+                    <span class="title"><?= $this->request->session()->read('Auth.User.nome') ?></span>
+                    <p><?= $this->request->session()->read('Auth.User.email') ?></p>
+                    <a href="/usuarios/logout" class="secondary-content"><i class="material-icons">logout</i></a>
+                </li>
+            </ul>
         </div>
     </nav>
     <?= $this->Flash->render() ?>
@@ -82,6 +94,13 @@ $cakeDescription = 'Toolaa';
             draggable: true
         });
         $('.button-collapse').sideNav();
+        $('.dropdown-button').dropdown({
+            inDuration: 300,
+            outDuration: 225,
+            hover: true, // Activate on hover
+            belowOrigin: true, // Displays dropdown below the button
+            alignment: 'left' // Displays dropdown with edge aligned to the left of button
+        });
 
     });
 
