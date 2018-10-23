@@ -1,12 +1,4 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Usuario $usuario
- */
- $this->layout = 'Materialize.materialize';
-
-?>
-<div class="fixed-action-btn click-to-toggle">
+<div class="fixed-action-btn">
     <a class="btn-floating btn-large red">
         <i class="large material-icons">mode_edit</i>
     </a>
@@ -51,7 +43,7 @@
 <div class="card darken-1 col s12 m10 offset-m2">
     <div class="card-content black-text">
         <?= $this->Form->create($usuario) ?>
-        <span class="card-title green-text"><?= __('Add Usuario') ?></span>
+        <span class="card-title green-text"><?= __('Cadastrar Usuario') ?></span>
         <div class="row">
             <div class="col s12 m6 l6">
                 <div class="input-field">
@@ -65,7 +57,7 @@
             </div>
             <div class="col s12 m6 l6">
                 <div class="input-field">
-                    <?= $this->Form->control('senha') ?>
+                    <?= $this->Form->control('senha', ['type' => 'password']) ?>
                 </div>
             </div>
             <div class="col s12 m6 l6">

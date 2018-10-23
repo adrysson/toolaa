@@ -1,13 +1,4 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Usuario[]|\Cake\Collection\CollectionInterface $usuarios
- */
-
- $this->layout = "Materialize.materialize";
-
-?>
-<div class="fixed-action-btn click-to-toggle">
+<div class="fixed-action-btn">
     <a class="btn-floating btn-large red">
         <i class="large material-icons">mode_edit</i>
     </a>
@@ -58,12 +49,9 @@
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('nome') ?></th>
                     <th><?= $this->Paginator->sort('email') ?></th>
-                    <th><?= $this->Paginator->sort('senha') ?></th>
                     <th><?= $this->Paginator->sort('grupo_id') ?></th>
                     <th><?= $this->Paginator->sort('perfil_id') ?></th>
-                    <th><?= $this->Paginator->sort('created') ?></th>
-                    <th><?= $this->Paginator->sort('modified') ?></th>
-                    <th><?= __('Actions') ?></th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -72,11 +60,8 @@
                     <td><?= $this->Number->format($usuario->id) ?></td>
                     <td><?= h($usuario->nome) ?></td>
                     <td><?= h($usuario->email) ?></td>
-                    <td><?= h($usuario->senha) ?></td>
-                    <td><?= $usuario->has('grupo') ? $this->Html->link($usuario->grupo->id, ['controller' => 'Grupos', 'action' => 'view', $usuario->grupo->id]) : '' ?></td>
-                    <td><?= $usuario->has('perfil') ? $this->Html->link($usuario->perfil->id, ['controller' => 'Perfis', 'action' => 'view', $usuario->perfil->id]) : '' ?></td>
-                    <td><?= h($usuario->created) ?></td>
-                    <td><?= h($usuario->modified) ?></td>
+                    <td><?= $usuario->has('grupo') ? $this->Html->link($usuario->grupo->nome, ['controller' => 'Grupos', 'action' => 'view', $usuario->grupo->id]) : '' ?></td>
+                    <td><?= $usuario->has('perfil') ? $this->Html->link($usuario->perfil->nome, ['controller' => 'Perfis', 'action' => 'view', $usuario->perfil->id]) : '' ?></td>
                     <td>
                         <?= $this->Html->link('<i class="material-icons tiny-custom black-text" title="'. __('View') . '" >zoom_in</i>', ['action' => 'view', $usuario->id], ['escape' => false]) ?>
                         <?= $this->Html->link('<i class="material-icons tiny-custom black-text" title="'. __('Edit') . '" >create</i>', ['action' => 'edit', $usuario->id], ['escape' => false]) ?>
@@ -98,4 +83,4 @@
     </ul>
 </div>
 
-<p class="right"><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
+<p class="center"><?= $this->Paginator->counter(['format' => __('Página {{page}} de {{pages}}, exibindo {{current}} registro(s) de um total de {{count}}, começando no registro {{start}}, terminando no registro {{end}}')]) ?></p>

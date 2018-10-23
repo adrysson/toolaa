@@ -44,7 +44,7 @@ class UsuariosController extends AppController
     public function view($id = null)
     {
         $usuario = $this->Usuarios->get($id, [
-            'contain' => ['Grupos', 'Perfis', 'Testes']
+            'contain' => ['Grupos', 'Perfis', 'Testes' => ['Artigos', 'Ferramentas']]
         ]);
 
         $this->set('usuario', $usuario);
@@ -67,8 +67,8 @@ class UsuariosController extends AppController
             }
             $this->Flash->error(__('The usuario could not be saved. Please, try again.'));
         }
-        $grupos = $this->Usuarios->Grupos->find('list', ['limit' => 200]);
-        $perfis = $this->Usuarios->Perfis->find('list', ['limit' => 200]);
+        $grupos = $this->Usuarios->Grupos->find('list', ['limit' => 200, 'valueField' => 'nome', 'keyField' => 'id']);
+        $perfis = $this->Usuarios->Perfis->find('list', ['limit' => 200, 'valueField' => 'nome', 'keyField' => 'id']);
         $this->set(compact('usuario', 'grupos', 'perfis'));
     }
 
