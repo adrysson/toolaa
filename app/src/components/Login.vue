@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="login">
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
     <ul>
@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  name: 'hello',
+  name: 'login',
   data () {
     return {
       msg: 'Welcome to Your Vue.js PWA'
