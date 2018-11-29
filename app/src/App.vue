@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <vue-topprogress ref="topProgress"></vue-topprogress>
+    <notifications position="top center"/>
     <main>
       <router-view></router-view>
     </main>

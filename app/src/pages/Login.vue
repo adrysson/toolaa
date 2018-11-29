@@ -5,7 +5,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-5 col-lg-6 col-md-10 col-sm-12 mx-auto mt-5">
-                            <h2 class="h2 mb-2 text-center">Toolaa</h2>
+                            <h2 class="h2 mb-2 text-center">TOOLAA</h2>
                             <legend class="small justify-content-center align-items-center text-center">
                                 Made by <a href="https://github.com/adrysson" target="_blank">Adrysson</a>
                             </legend>
