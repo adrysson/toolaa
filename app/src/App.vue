@@ -1,6 +1,8 @@
 <template>
   <div id="app">
+    <main>
       <router-view></router-view>
+    </main>
   </div>
 </template>
 
@@ -22,17 +24,11 @@ body {
   color: #2c3e50;
 }
 
-main {
-  text-align: center;
-  margin-top: 40px;
-}
-
-header {
-  margin: 0;
-  height: 56px;
-  padding: 0 16px 0 24px;
-  background-color: #35495E;
-  color: #ffffff;
+html,body {
+    margin:0;
+    padding:0;
+    height:100%; /* needed for container min-height */
+    background:#e8eaf6;
 }
 
 header span {
