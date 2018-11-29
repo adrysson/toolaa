@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <vue-topprogress ref="topProgress"></vue-topprogress>
     <main>
       <router-view></router-view>
     </main>
@@ -8,7 +9,9 @@
 
 <script>
 export default {
-  name: 'app'
+  name: 'app',
+  mounted () {
+  }
 }
 </script>
 
@@ -40,5 +43,23 @@ header span {
   font-weight: 400;
   box-sizing: border-box;
   padding-top: 16px;
+}
+
+@keyframes spinner-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.spinner {
+  display: inline-block;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: white;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spinner-spin 0.8s linear infinite;
 }
 </style>
