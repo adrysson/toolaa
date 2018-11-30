@@ -30,6 +30,10 @@
 </template>
 
 <script>
+import Vue from 'vue'
+import axios from 'axios'
+
+Vue.use(axios)
 
 export default {
   name: 'login',
@@ -46,9 +50,18 @@ export default {
   methods: {
     login () {
       this.loading = true
-      setTimeout(() => {
-        this.loading = false
-      }, 1000)
+      axios.post(`${process.env.ROOT_API}/${process.env.API_VERSION}/usuarios/login.json`, this.form)
+        .then(success => {
+          console.log(success)
+        })
+        .catch(error => {
+          this.$notify({
+            title: 'Login não realizado',
+            text: error.response.data,
+            type: 'error'
+          })
+        })
+        .then(this.loading = false)
     }
   }
 }
