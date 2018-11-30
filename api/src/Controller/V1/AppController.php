@@ -37,6 +37,7 @@ class AppController extends Controller
      *
      * @return void
      */
+
     public function initialize()
     {
         parent::initialize();
@@ -44,23 +45,26 @@ class AppController extends Controller
         $this->loadComponent('RequestHandler', [
             'enableBeforeRedirect' => false,
         ]);
+
         $this->loadComponent('Auth', [
             'storage' => 'Memory',
             'authenticate' => [
                 'Form' => [
+                    'userModel' => 'Usuarios',
                     'fields' => [
                         'username' => 'email',
                         'password' => 'senha'
                     ]
                 ],
                 'ADmad/JwtAuth.Jwt' => [
-                    'userModel' => 'Users',
+                    'userModel' => 'Usuarios',
                     'fields' => [
                         'id' => 'id'
                     ],
                     'parameter' => '_token',
                 ]
             ],
+            'authError' => 'É necessário realizar o login para ter acesso a esta página',
             'checkAuthIn' => 'Controller.initialize',
         ]);
 
