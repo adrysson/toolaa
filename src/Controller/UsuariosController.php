@@ -38,7 +38,7 @@ class UsuariosController extends AppController
     public function login()
     {
         if ($this->request->is('post')) {
-            if ($this->Auth->identify()) {
+            if ($user = $this->Auth->identify()) {
                 $this->Auth->setUser($user);
                 return $this->redirect($this->Auth->redirectUrl());
             } else {
